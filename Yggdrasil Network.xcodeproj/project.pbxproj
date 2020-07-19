@@ -1,0 +1,670 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */; };
+		3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196A21E35A7C009320F3 /* PeersViewController.swift */; };
+		3939196D21E39313009320F3 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196C21E39313009320F3 /* UIDevice.swift */; };
+		3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197221E39815009320F3 /* ToggleTableViewCell.swift */; };
+		3939197521E3AADB009320F3 /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197421E3AADB009320F3 /* ConfigurationProxy.swift */; };
+		3940354623F4C0C100E81A29 /* Yggdrasil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3944B66321DAAEA500AF102D /* Yggdrasil.framework */; };
+		394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A1EB221DEA46400D9F553 /* SettingsViewController.swift */; };
+		39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39682A382225AD15004FB670 /* CopyableLabel.swift */; };
+		397346D521E8E422009B17F6 /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */; };
+		39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AE88382319C93F0010FFF6 /* NetworkExtension.framework */; };
+		39AE883A2319CA750010FFF6 /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197421E3AADB009320F3 /* ConfigurationProxy.swift */; };
+		39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
+		39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
+		E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */; };
+		E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE701DF8FC3C00D7265D /* TableViewController.swift */; };
+		E593CE741DF8FC3C00D7265D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E593CE721DF8FC3C00D7265D /* Main.storyboard */; };
+		E593CE761DF8FC3C00D7265D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E593CE751DF8FC3C00D7265D /* Assets.xcassets */; };
+		E593CE791DF8FC3C00D7265D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */; };
+		E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */; };
+		E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E593CE9E1DF905AF00D7265D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E593CE631DF8FC3C00D7265D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E593CE961DF905AF00D7265D;
+			remoteInfo = NEPacketTunnelVPNDemoTunnel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E593CEA41DF905B000D7265D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetworkExtension.entitlements; sourceTree = "<group>"; };
+		3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetwork.entitlements; sourceTree = "<group>"; };
+		3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		3939196A21E35A7C009320F3 /* PeersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
+		3939196C21E39313009320F3 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		3939197221E39815009320F3 /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
+		3939197421E3AADB009320F3 /* ConfigurationProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationProxy.swift; sourceTree = "<group>"; };
+		3944B66321DAAEA500AF102D /* Yggdrasil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Yggdrasil.framework; sourceTree = "<group>"; };
+		394A1EB221DEA46400D9F553 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		39682A382225AD15004FB670 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
+		397346D021E8BB5F009B17F6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
+		397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformAppDelegate.swift; sourceTree = "<group>"; };
+		39AE88382319C93F0010FFF6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		39CC924B221DEDCE004960DC /* NSNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.swift; sourceTree = "<group>"; };
+		E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E593CE701DF8FC3C00D7265D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E593CE731DF8FC3C00D7265D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E593CE751DF8FC3C00D7265D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E593CE781DF8FC3C00D7265D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E593CE7A1DF8FC3C00D7265D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YggdrasilNetworkExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		E593CE9D1DF905AF00D7265D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E593CE681DF8FC3C00D7265D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E593CE941DF905AF00D7265D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3940354623F4C0C100E81A29 /* Yggdrasil.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39042D3121E4BDA20088A534 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E593CE721DF8FC3C00D7265D /* Main.storyboard */,
+				E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3939196E21E3979C009320F3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E593CE701DF8FC3C00D7265D /* TableViewController.swift */,
+				3939196A21E35A7C009320F3 /* PeersViewController.swift */,
+				394A1EB221DEA46400D9F553 /* SettingsViewController.swift */,
+				3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3939196F21E397A9009320F3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3939196C21E39313009320F3 /* UIDevice.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3939197021E397BC009320F3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */,
+				39CC924B221DEDCE004960DC /* NSNotification.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		3939197121E397D1009320F3 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				3939197221E39815009320F3 /* ToggleTableViewCell.swift */,
+				39682A382225AD15004FB670 /* CopyableLabel.swift */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
+		399D032221DA775D0016354F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39AE88382319C93F0010FFF6 /* NetworkExtension.framework */,
+				397346D021E8BB5F009B17F6 /* NetworkExtension.framework */,
+				3944B66321DAAEA500AF102D /* Yggdrasil.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39AE88372319C8840010FFF6 /* Yggdrasil Network Cross-Platform */ = {
+			isa = PBXGroup;
+			children = (
+				397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */,
+				3939197421E3AADB009320F3 /* ConfigurationProxy.swift */,
+			);
+			path = "Yggdrasil Network Cross-Platform";
+			sourceTree = "<group>";
+		};
+		E593CE621DF8FC3C00D7265D = {
+			isa = PBXGroup;
+			children = (
+				3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */,
+				3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */,
+				E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */,
+				39AE88372319C8840010FFF6 /* Yggdrasil Network Cross-Platform */,
+				E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */,
+				E593CE6C1DF8FC3C00D7265D /* Products */,
+				399D032221DA775D0016354F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E593CE6C1DF8FC3C00D7265D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */,
+				E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */ = {
+			isa = PBXGroup;
+			children = (
+				39042D3121E4BDA20088A534 /* Storyboards */,
+				3939197021E397BC009320F3 /* Application */,
+				3939196F21E397A9009320F3 /* Extensions */,
+				3939196E21E3979C009320F3 /* View Controllers */,
+				3939197121E397D1009320F3 /* UI Components */,
+				E593CE751DF8FC3C00D7265D /* Assets.xcassets */,
+				E593CE7A1DF8FC3C00D7265D /* Info.plist */,
+			);
+			path = "Yggdrasil Network iOS";
+			sourceTree = "<group>";
+		};
+		E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */,
+				E593CE9D1DF905AF00D7265D /* Info.plist */,
+			);
+			path = "Yggdrasil Network Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E593CE6A1DF8FC3C00D7265D /* YggdrasilNetwork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E593CE7D1DF8FC3C00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetwork" */;
+			buildPhases = (
+				E593CE671DF8FC3C00D7265D /* Sources */,
+				E593CE681DF8FC3C00D7265D /* Frameworks */,
+				E593CE691DF8FC3C00D7265D /* Resources */,
+				E593CEA41DF905B000D7265D /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E593CE9F1DF905AF00D7265D /* PBXTargetDependency */,
+			);
+			name = YggdrasilNetwork;
+			productName = NEPacketTunnelVPNDemo;
+			productReference = E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E593CEA31DF905AF00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetworkExtension" */;
+			buildPhases = (
+				E593CE931DF905AF00D7265D /* Sources */,
+				E593CE941DF905AF00D7265D /* Frameworks */,
+				E593CE951DF905AF00D7265D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YggdrasilNetworkExtension;
+			productName = NEPacketTunnelVPNDemoTunnel;
+			productReference = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E593CE631DF8FC3C00D7265D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "";
+				TargetAttributes = {
+					E593CE6A1DF8FC3C00D7265D = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = R9AV23TXF2;
+						LastSwiftMigration = 1030;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+					E593CE961DF905AF00D7265D = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = R9AV23TXF2;
+						LastSwiftMigration = 1030;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = E593CE661DF8FC3C00D7265D /* Build configuration list for PBXProject "Yggdrasil Network" */;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E593CE621DF8FC3C00D7265D;
+			productRefGroup = E593CE6C1DF8FC3C00D7265D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E593CE6A1DF8FC3C00D7265D /* YggdrasilNetwork */,
+				E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E593CE691DF8FC3C00D7265D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E593CE791DF8FC3C00D7265D /* LaunchScreen.storyboard in Resources */,
+				E593CE761DF8FC3C00D7265D /* Assets.xcassets in Resources */,
+				E593CE741DF8FC3C00D7265D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E593CE951DF905AF00D7265D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E593CE671DF8FC3C00D7265D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */,
+				3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */,
+				3939196D21E39313009320F3 /* UIDevice.swift in Sources */,
+				394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */,
+				E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */,
+				39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */,
+				3939197521E3AADB009320F3 /* ConfigurationProxy.swift in Sources */,
+				E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */,
+				397346D521E8E422009B17F6 /* CrossPlatformAppDelegate.swift in Sources */,
+				3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */,
+				39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E593CE931DF905AF00D7265D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */,
+				E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */,
+				39AE883A2319CA750010FFF6 /* ConfigurationProxy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E593CE9F1DF905AF00D7265D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */;
+			targetProxy = E593CE9E1DF905AF00D7265D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E593CE721DF8FC3C00D7265D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E593CE731DF8FC3C00D7265D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E593CE781DF8FC3C00D7265D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E593CE7B1DF8FC3C00D7265D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+			};
+			name = Debug;
+		};
+		E593CE7C1DF8FC3C00D7265D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+			};
+			name = Release;
+		};
+		E593CE7E1DF8FC3C00D7265D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = R9AV23TXF2;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E593CE7F1DF8FC3C00D7265D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = R9AV23TXF2;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E593CEA11DF905AF00D7265D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = YggdrasilNetworkExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = R9AV23TXF2;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E593CEA21DF905AF00D7265D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = YggdrasilNetworkExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = R9AV23TXF2;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8ce353d5-fd5f-4d5e-b664-8ad294091125";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E593CE661DF8FC3C00D7265D /* Build configuration list for PBXProject "Yggdrasil Network" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E593CE7B1DF8FC3C00D7265D /* Debug */,
+				E593CE7C1DF8FC3C00D7265D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E593CE7D1DF8FC3C00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E593CE7E1DF8FC3C00D7265D /* Debug */,
+				E593CE7F1DF8FC3C00D7265D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E593CEA31DF905AF00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetworkExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E593CEA11DF905AF00D7265D /* Debug */,
+				E593CEA21DF905AF00D7265D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E593CE631DF8FC3C00D7265D /* Project object */;
+}
