@@ -20,10 +20,12 @@ class TableViewController: UITableViewController {
     @IBOutlet var statsSelfCoords: UILabel!
     @IBOutlet var statsSelfPeers: UILabel!
     
+    @IBOutlet var statsVersion: UILabel!
+    
     override func viewDidLoad() {      
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilSelfUpdated), name: NSNotification.Name.YggdrasilSelfUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilPeersUpdated), name: NSNotification.Name.YggdrasilPeersUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilSwitchPeersUpdated), name: NSNotification.Name.YggdrasilSwitchPeersUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilDHTUpdated), name: NSNotification.Name.YggdrasilDHTUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilSettingsUpdated), name: NSNotification.Name.YggdrasilSettingsUpdated, object: nil)
     }
     
@@ -39,6 +41,8 @@ class TableViewController: UITableViewController {
         if let row = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: row, animated: true)
         }
+        
+        self.statsVersion.text = Yggdrasil.MobileGetVersion()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,18 +69,18 @@ class TableViewController: UITableViewController {
         
         if let footer = toggleTableView.footerView(forSection: 0) {
             if let label = footer.textLabel {
-                label.text = app.vpnManager.isOnDemandEnabled ? "Yggdrasil will automatically stop and start based on settings." : "You must restart Yggdrasil to make configuration changes effective."
+                label.text = app.vpnManager.isOnDemandEnabled ? "Yggdrasil is configured to automatically start and stop based on available connectivity." : "Yggdrasil is configured to start and stop manually."
             }
         }
     }
     
     func updateConnectedStatus() {
         if self.app.vpnManager.connection.status == .connected {
-            if app.yggdrasilSwitchPeers.count > 0 {
-                connectedStatusLabel.text = "Connected"
+            if app.yggdrasilDHT.count > 0 {
+                connectedStatusLabel.text = "Enabled"
                 connectedStatusLabel.textColor = UIColor(red: 0.37, green: 0.79, blue: 0.35, alpha: 1.0)
             } else {
-                connectedStatusLabel.text = "No active connections"
+                connectedStatusLabel.text = "No connectivity"
                 connectedStatusLabel.textColor = UIColor.red
             }
         } else {
@@ -104,12 +108,12 @@ class TableViewController: UITableViewController {
         self.updateConnectedStatus()
     }
     
-    @objc func onYggdrasilSwitchPeersUpdated(notification: NSNotification) {
+    @objc func onYggdrasilDHTUpdated(notification: NSNotification) {
         self.updateConnectedStatus()
     }
     
     @objc func onYggdrasilPeersUpdated(notification: NSNotification) {
-        let peercount = app.yggdrasilSwitchPeers.count
+        let peercount = app.yggdrasilPeers.count
         if peercount <= 0 {
             statsSelfPeers.text = "No peers"
         } else if peercount == 1 {

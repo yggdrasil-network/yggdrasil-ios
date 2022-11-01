@@ -13,28 +13,18 @@ class SettingsViewController: UITableViewController, UIDocumentBrowserViewContro
 
     @IBOutlet weak var deviceNameField: UITextField!
     
-    @IBOutlet weak var encryptionPublicKeyLabel: UILabel!
     @IBOutlet weak var signingPublicKeyLabel: UILabel!
     
     @IBOutlet weak var autoStartWiFiCell: UITableViewCell!
     @IBOutlet weak var autoStartMobileCell: UITableViewCell!
-    
-    @IBOutlet weak var sessionFirewallPeeredCell: UITableViewCell!
-    @IBOutlet weak var sessionFirewallOtherCell: UITableViewCell!
-    @IBOutlet weak var sessionFirewallOutboundCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let config = self.app.yggdrasilConfig {
             deviceNameField.text = config.get("name", inSection: "NodeInfo") as? String ?? ""
-            encryptionPublicKeyLabel.text = config.get("EncryptionPublicKey") as? String ?? "Unknown"
-            signingPublicKeyLabel.text = config.get("SigningPublicKey") as? String ?? "Unknown"
-            
-            sessionFirewallPeeredCell.accessoryType = config.get("AllowFromDirect", inSection: "SessionFirewall") as? Bool ?? true ? .checkmark : .none
-            sessionFirewallOtherCell.accessoryType = config.get("AllowFromRemote", inSection: "SessionFirewall") as? Bool ?? true ? .checkmark : .none
-            sessionFirewallOutboundCell.accessoryType = config.get("AlwaysAllowOutbound", inSection: "SessionFirewall") as? Bool ?? true ? .checkmark : .none
-            
+            signingPublicKeyLabel.text = config.get("PublicKey") as? String ?? config.get("SigningPublicKey") as? String ?? "Unknown"
+
             autoStartWiFiCell.accessoryType = config.get("WiFi", inSection: "AutoStart") as? Bool ?? false ? .checkmark : .none
             autoStartMobileCell.accessoryType = config.get("Mobile", inSection: "AutoStart") as? Bool ?? false ? .checkmark : .none
         }
@@ -61,20 +51,7 @@ class SettingsViewController: UITableViewController, UIDocumentBrowserViewContro
                     try? config.save(to: &app.vpnManager)
                 }
             }
-        case 2:
-            let settings = [
-                "AllowFromDirect",
-                "AllowFromRemote",
-                "AlwaysAllowOutbound"
-            ]
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.accessoryType = cell.accessoryType == .checkmark ? .none : .checkmark
-                if let config = self.app.yggdrasilConfig {
-                    config.set(settings[indexPath.last!], inSection: "SessionFirewall", to: cell.accessoryType == .checkmark)
-                    try? config.save(to: &app.vpnManager)
-                }
-            }
-        case 4:
+        case 3:
             switch indexPath.last {
             case 0: // import
                 if #available(iOS 11.0, *) {
@@ -113,7 +90,7 @@ class SettingsViewController: UITableViewController, UIDocumentBrowserViewContro
             default:
                 break
             }
-        case 5:
+        case 4:
             let alert = UIAlertController(title: "Warning", message: "This operation will reset your configuration and generate new keys. This is not reversible unless your configuration has been exported. Changes will not take effect until the next time Yggdrasil is restarted.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { action in
                 self.app.yggdrasilConfig = ConfigurationProxy()
@@ -133,7 +110,6 @@ class SettingsViewController: UITableViewController, UIDocumentBrowserViewContro
         self.dismiss(animated: true, completion: nil)
     }
     
-    @available(iOS 11.0, *)
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
         do {
             if let url = documentURLs.first {
