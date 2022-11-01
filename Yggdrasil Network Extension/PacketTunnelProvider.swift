@@ -9,22 +9,20 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     var yggdrasilConfig: ConfigurationProxy?
     
     @objc func readPacketsFromTun() {
-        if let conduit = self.conduit {
-            autoreleasepool {
-                self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
-                    for packet in packets {
-                        conduit.send(packet)
-                    }
-                    self.readPacketsFromTun()
+        autoreleasepool {
+            self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
+                for packet in packets {
+                    try? self.yggdrasil.sendBuffer(packet, length: packet.count)
                 }
+                self.readPacketsFromTun()
             }
         }
     }
 
     @objc func writePacketsToTun() {
-        while let conduit = self.conduit {
+        while true {
             autoreleasepool {
-                if let data = conduit.recv() {
+                if let data = try? self.yggdrasil.recv() {
                     self.packetFlow.writePackets([data], withProtocols: [NSNumber](repeating: AF_INET6 as NSNumber, count: 1))
                 }
             }
