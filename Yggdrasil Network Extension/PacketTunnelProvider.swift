@@ -5,8 +5,11 @@ import Yggdrasil
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
     var yggdrasil: MobileYggdrasil = MobileYggdrasil()
-    var conduit: DummyConduitEndpoint? = nil
     var yggdrasilConfig: ConfigurationProxy?
+    
+    private var readThread: Thread?
+    private var writeThread: Thread?
+    private var writeBuffer = Data(count: 65535)
     
     @objc func readPacketsFromTun() {
         autoreleasepool {
@@ -28,7 +31,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
         }
     }
-    
+
     func startYggdrasil() -> Error? {
         var err: Error? = nil
 
@@ -47,7 +50,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 NSLog("Configuration loaded")
                 
                 do {
-                    self.conduit = try self.yggdrasil.startJSON(config.data())
+                    try self.yggdrasil.startJSON(config.data())
                 } catch {
                     NSLog("Starting Yggdrasil process produced an error: " + error.localizedDescription)
                     return
@@ -62,6 +65,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 let tunnelNetworkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: address)
                 tunnelNetworkSettings.ipv6Settings = NEIPv6Settings(addresses: [address], networkPrefixLengths: [7])
                 tunnelNetworkSettings.ipv6Settings?.includedRoutes = [NEIPv6Route(destinationAddress: "0200::", networkPrefixLength: 7)]
+                tunnelNetworkSettings.mtu = NSNumber(integerLiteral: self.yggdrasil.getMTU())
 
                 NSLog("Setting tunnel network settings...")
                 
@@ -73,16 +77,19 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     } else {
                         NSLog("Yggdrasil tunnel settings set successfully")
                         
-                        let readthread: Thread = Thread(target: self, selector: #selector(self.readPacketsFromTun), object: nil)
-                        readthread.name = "TUN Packet Reader"
-                        readthread.qualityOfService = .utility
+                        self.readThread = Thread(target: self, selector: #selector(self.readPacketsFromTun), object: nil)
+                        if let readThread = self.readThread {
+                            readThread.name = "TUN Packet Reader"
+                            readThread.qualityOfService = .utility
+                            readThread.start()
+                        }
                         
-                        let writethread: Thread = Thread(target: self, selector: #selector(self.writePacketsToTun), object: nil)
-                        writethread.name = "TUN Packet Writer"
-                        writethread.qualityOfService = .utility
-                        
-                        readthread.start()
-                        writethread.start()
+                        self.writeThread = Thread(target: self, selector: #selector(self.writePacketsToTun), object: nil)
+                        if let writeThread = self.writeThread {
+                            writeThread.name = "TUN Packet Writer"
+                            writeThread.qualityOfService = .utility
+                            writeThread.start()
+                        }
                     }
                 }
             }
@@ -110,6 +117,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        self.readThread?.cancel()
+        self.writeThread?.cancel()
         try? self.yggdrasil.stop()
         super.stopTunnel(with: reason, completionHandler: completionHandler)
     }
@@ -125,8 +134,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler?(self.yggdrasil.getCoordsString().data(using: .utf8))
         case "peers":
             completionHandler?(self.yggdrasil.getPeersJSON().data(using: .utf8))
-        case "switchpeers":
-            completionHandler?(self.yggdrasil.getSwitchPeersJSON().data(using: .utf8))
+        case "dht":
+            completionHandler?(self.yggdrasil.getDHTJSON().data(using: .utf8))
         default:
             completionHandler?(nil)
         }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,13 +11,11 @@
 		3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196A21E35A7C009320F3 /* PeersViewController.swift */; };
 		3939196D21E39313009320F3 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196C21E39313009320F3 /* UIDevice.swift */; };
 		3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197221E39815009320F3 /* ToggleTableViewCell.swift */; };
-		3939197521E3AADB009320F3 /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197421E3AADB009320F3 /* ConfigurationProxy.swift */; };
-		3940354623F4C0C100E81A29 /* Yggdrasil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3944B66321DAAEA500AF102D /* Yggdrasil.framework */; };
 		394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A1EB221DEA46400D9F553 /* SettingsViewController.swift */; };
 		39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39682A382225AD15004FB670 /* CopyableLabel.swift */; };
-		397346D521E8E422009B17F6 /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */; };
+		3996AF38270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
+		3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
 		39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AE88382319C93F0010FFF6 /* NetworkExtension.framework */; };
-		39AE883A2319CA750010FFF6 /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197421E3AADB009320F3 /* ConfigurationProxy.swift */; };
 		39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
 		39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
 		E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */; };
@@ -60,12 +58,9 @@
 		3939196A21E35A7C009320F3 /* PeersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
 		3939196C21E39313009320F3 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		3939197221E39815009320F3 /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
-		3939197421E3AADB009320F3 /* ConfigurationProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationProxy.swift; sourceTree = "<group>"; };
-		3944B66321DAAEA500AF102D /* Yggdrasil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Yggdrasil.framework; sourceTree = "<group>"; };
 		394A1EB221DEA46400D9F553 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		39682A382225AD15004FB670 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
-		397346D021E8BB5F009B17F6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
-		397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformAppDelegate.swift; sourceTree = "<group>"; };
+		3996AF37270328080070947D /* Yggdrasil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Yggdrasil.xcframework; sourceTree = "<group>"; };
 		39AE88382319C93F0010FFF6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		39CC924B221DEDCE004960DC /* NSNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.swift; sourceTree = "<group>"; };
 		E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3996AF38270328080070947D /* Yggdrasil.xcframework in Frameworks */,
 				39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3940354623F4C0C100E81A29 /* Yggdrasil.framework in Frameworks */,
+				3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,20 +145,10 @@
 		399D032221DA775D0016354F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3996AF37270328080070947D /* Yggdrasil.xcframework */,
 				39AE88382319C93F0010FFF6 /* NetworkExtension.framework */,
-				397346D021E8BB5F009B17F6 /* NetworkExtension.framework */,
-				3944B66321DAAEA500AF102D /* Yggdrasil.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		39AE88372319C8840010FFF6 /* Yggdrasil Network Cross-Platform */ = {
-			isa = PBXGroup;
-			children = (
-				397346D421E8E422009B17F6 /* CrossPlatformAppDelegate.swift */,
-				3939197421E3AADB009320F3 /* ConfigurationProxy.swift */,
-			);
-			path = "Yggdrasil Network Cross-Platform";
 			sourceTree = "<group>";
 		};
 		E593CE621DF8FC3C00D7265D = {
@@ -171,7 +157,6 @@
 				3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */,
 				3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */,
 				E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */,
-				39AE88372319C8840010FFF6 /* Yggdrasil Network Cross-Platform */,
 				E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */,
 				E593CE6C1DF8FC3C00D7265D /* Products */,
 				399D032221DA775D0016354F /* Frameworks */,
@@ -256,14 +241,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					E593CE6A1DF8FC3C00D7265D = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = R9AV23TXF2;
 						LastSwiftMigration = 1030;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -281,9 +264,7 @@
 					};
 					E593CE961DF905AF00D7265D = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = R9AV23TXF2;
 						LastSwiftMigration = 1030;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -348,9 +329,7 @@
 				394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */,
 				E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */,
 				39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */,
-				3939197521E3AADB009320F3 /* ConfigurationProxy.swift in Sources */,
 				E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */,
-				397346D521E8E422009B17F6 /* CrossPlatformAppDelegate.swift in Sources */,
 				3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */,
 				39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */,
 			);
@@ -362,7 +341,6 @@
 			files = (
 				39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */,
 				E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */,
-				39AE883A2319CA750010FFF6 /* ConfigurationProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +399,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -446,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -484,6 +463,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -503,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -522,9 +502,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -532,14 +512,17 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -553,9 +536,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -563,13 +546,16 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,9 +566,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = YggdrasilNetworkExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -590,7 +576,8 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,8 +587,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -609,9 +599,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = YggdrasilNetworkExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -619,7 +609,8 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -629,8 +620,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8ce353d5-fd5f-4d5e-b664-8ad294091125";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};

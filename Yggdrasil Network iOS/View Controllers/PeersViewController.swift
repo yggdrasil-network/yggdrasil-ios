@@ -49,7 +49,7 @@ class PeersViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return app.yggdrasilSwitchPeers.count
+        case 0: return app.yggdrasilPeers.count
         case 1:
             if let config = self.app.yggdrasilConfig {
                 if let peers = config.get("Peers") as? [String] {
@@ -58,9 +58,6 @@ class PeersViewController: UITableViewController {
             }
             return 0
         case 2:
-            if UIDevice.current.hasCellularCapabilites {
-                return 3
-            }
             return 2
         default: return 0
         }
@@ -70,20 +67,18 @@ class PeersViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "discoveredPeerPrototype", for: indexPath)
-            let peers = app.yggdrasilSwitchPeers.sorted { (a, b) -> Bool in
+            let peers = app.yggdrasilPeers.sorted { (a, b) -> Bool in
                 return (a["Port"] as! Int) < (b["Port"] as! Int)
             }
             
             if indexPath.row < peers.count {
                 let value = peers[indexPath.row]
                 let proto = value["Protocol"] as? String ?? "tcp"
-                let sent = value["BytesSent"] as? Double ?? 0
-                let recvd = value["BytesRecvd"] as? Double ?? 0
-                let rx = self.format(bytes: sent)
-                let tx = self.format(bytes: recvd)
+                let remote = value["Remote"] as? String ?? "unknown"
+                let prio = value["Priority"] as? Int ?? 0
                 
-                cell.textLabel?.text = "\(value["Endpoint"] ?? "unknown")"
-                cell.detailTextLabel?.text = "\(proto.uppercased()) peer on port \(value["Port"] ?? "unknown"), sent \(tx), received \(rx)"
+                cell.textLabel?.text = "\(value["IP"] ?? "(unknown)")"
+                cell.detailTextLabel?.text = "\(proto.uppercased()): \(remote)"
             }
             return cell
         case 1:
@@ -101,33 +96,24 @@ class PeersViewController: UITableViewController {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "togglePrototype", for: indexPath) as! ToggleTableViewCell
                 cell.isUserInteractionEnabled = true
-                cell.label?.text = "Search for multicast peers"
+                cell.label?.text = "Discoverable over multicast"
                 cell.label?.isEnabled = true
-                cell.toggle?.addTarget(self, action: #selector(toggledMulticast), for: .valueChanged)
+                cell.toggle?.addTarget(self, action: #selector(toggledMulticastBeacons), for: .valueChanged)
                 cell.toggle?.isEnabled = true
                 if let config = self.app.yggdrasilConfig {
-                    let interfaces = config.get("MulticastInterfaces") as? [String] ?? []
-                    cell.toggle?.isOn = interfaces.contains("en*")
+                    cell.toggle?.isOn = config.multicastBeacons
                 }
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "togglePrototype", for: indexPath) as! ToggleTableViewCell
-                cell.isUserInteractionEnabled = false
-                cell.label?.text = "Search for nearby iOS peers"
-                cell.label?.isEnabled = false
-                cell.toggle?.addTarget(self, action: #selector(toggledAWDL), for: .valueChanged)
-                cell.toggle?.setOn(false, animated: false)
-                cell.toggle?.isEnabled = false
-                /*if let config = self.app.yggdrasilConfig {
-                    let interfaces = config.get("MulticastInterfaces") as? [String] ?? []
-                    cell.toggle?.isOn = interfaces.contains("awdl0")
-                }*/
-                return cell
-            case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "menuPrototype", for: indexPath)
                 cell.isUserInteractionEnabled = true
-                cell.textLabel?.text = "Device settings"
-                cell.textLabel?.isEnabled = true
+                cell.label?.text = "Search for multicast peers"
+                cell.label?.isEnabled = true
+                cell.toggle?.addTarget(self, action: #selector(toggledMulticastListen), for: .valueChanged)
+                cell.toggle?.isEnabled = true
+                if let config = self.app.yggdrasilConfig {
+                    cell.toggle?.isOn = config.multicastListen
+                }
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "menuPrototype", for: indexPath)
@@ -163,28 +149,16 @@ class PeersViewController: UITableViewController {
         return "\(numberString) \(suffix)"
     }
     
-    @objc func toggledMulticast(_ sender: UISwitch) {
+    @objc func toggledMulticastBeacons(_ sender: UISwitch) {
         if let config = self.app.yggdrasilConfig {
-            var interfaces = config.get("MulticastInterfaces") as! [String]
-            if sender.isOn {
-                interfaces.append("en*")
-            } else {
-                interfaces.removeAll(where: { $0 == "en*" })
-            }
-            config.set("MulticastInterfaces", to: interfaces as [String])
+            config.multicastBeacons = sender.isOn
             try? config.save(to: &app.vpnManager)
         }
     }
     
-    @objc func toggledAWDL(_ sender: UISwitch) {
+    @objc func toggledMulticastListen(_ sender: UISwitch) {
         if let config = self.app.yggdrasilConfig {
-            var interfaces = config.get("MulticastInterfaces") as! [String]
-            if sender.isOn {
-                interfaces.append("awdl0")
-            } else {
-                interfaces.removeAll(where: { $0 == "awdl0" })
-            }
-            config.set("MulticastInterfaces", to: interfaces as [String])
+            config.multicastListen = sender.isOn
             try? config.save(to: &app.vpnManager)
         }
     }
@@ -214,7 +188,7 @@ class PeersViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 1:
-            return "Yggdrasil will automatically attempt to connect to configured peers when started."
+            return "Yggdrasil will automatically attempt to connect to configured peers when started. If you configure more than one peer, your device may carry traffic on behalf of other network nodes. Avoid this by configuring only a single peer."
         case 2:
             var str = "Multicast peers will be discovered on the same Wi-Fi network or via USB."
             if UIDevice.current.hasCellularCapabilites {
