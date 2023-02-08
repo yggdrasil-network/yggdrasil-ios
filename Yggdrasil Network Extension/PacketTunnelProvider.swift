@@ -9,24 +9,28 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private var readThread: Thread?
     private var writeThread: Thread?
-    private var writeBuffer = Data(count: 65535)
+    private let readBuffer = NSMutableData(length: 65535)
+    private let writeBuffer = Data(count: 65535)
     
     @objc func readPacketsFromTun() {
-        autoreleasepool {
-            self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
+        self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
+            autoreleasepool {
                 for packet in packets {
                     try? self.yggdrasil.sendBuffer(packet, length: packet.count)
                 }
-                self.readPacketsFromTun()
             }
+            self.readPacketsFromTun()
         }
     }
 
     @objc func writePacketsToTun() {
+        var n: Int = 0
+        let readData = Data(bytesNoCopy: readBuffer!.mutableBytes, count: 65535, deallocator: .none)
         while true {
             autoreleasepool {
-                if let data = try? self.yggdrasil.recv() {
-                    self.packetFlow.writePackets([data], withProtocols: [NSNumber](repeating: AF_INET6 as NSNumber, count: 1))
+                try? self.yggdrasil.recvBuffer(readBuffer as Data?, ret0_: &n)
+                if n > 0 {
+                  self.packetFlow.writePackets([readData[..<n]], withProtocols: [NSNumber](repeating: AF_INET6 as NSNumber, count: 1))
                 }
             }
         }

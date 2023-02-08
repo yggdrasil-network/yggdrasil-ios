@@ -12,6 +12,9 @@
 		3939196D21E39313009320F3 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196C21E39313009320F3 /* UIDevice.swift */; };
 		3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197221E39815009320F3 /* ToggleTableViewCell.swift */; };
 		394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A1EB221DEA46400D9F553 /* SettingsViewController.swift */; };
+		3952ADB729945AF700B3835D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
+		3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
+		3952ADBA29945AFA00B3835D /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */; };
 		39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39682A382225AD15004FB670 /* CopyableLabel.swift */; };
 		3996AF38270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
 		3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
@@ -24,7 +27,7 @@
 		E593CE761DF8FC3C00D7265D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E593CE751DF8FC3C00D7265D /* Assets.xcassets */; };
 		E593CE791DF8FC3C00D7265D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */; };
 		E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */; };
-		E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,15 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E593CEA41DF905B000D7265D /* Embed App Extensions */ = {
+		E593CEA41DF905B000D7265D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed App Extensions */,
+				E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -59,6 +62,8 @@
 		3939196C21E39313009320F3 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		3939197221E39815009320F3 /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		394A1EB221DEA46400D9F553 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3952ADB629945AF700B3835D /* ConfigurationProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationProxy.swift; sourceTree = "<group>"; };
+		3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformAppDelegate.swift; sourceTree = "<group>"; };
 		39682A382225AD15004FB670 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		3996AF37270328080070947D /* Yggdrasil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Yggdrasil.xcframework; sourceTree = "<group>"; };
 		39AE88382319C93F0010FFF6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -142,6 +147,16 @@
 			path = "UI Components";
 			sourceTree = "<group>";
 		};
+		3952ADB529945AE900B3835D /* Yggdrasil Network Core */ = {
+			isa = PBXGroup;
+			children = (
+				3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */,
+				3952ADB629945AF700B3835D /* ConfigurationProxy.swift */,
+			);
+			name = "Yggdrasil Network Core";
+			path = "Yggdrasil Network Cross-Platform";
+			sourceTree = "<group>";
+		};
 		399D032221DA775D0016354F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +169,7 @@
 		E593CE621DF8FC3C00D7265D = {
 			isa = PBXGroup;
 			children = (
+				3952ADB529945AE900B3835D /* Yggdrasil Network Core */,
 				3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */,
 				3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */,
 				E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */,
@@ -205,7 +221,7 @@
 				E593CE671DF8FC3C00D7265D /* Sources */,
 				E593CE681DF8FC3C00D7265D /* Frameworks */,
 				E593CE691DF8FC3C00D7265D /* Resources */,
-				E593CEA41DF905B000D7265D /* Embed App Extensions */,
+				E593CEA41DF905B000D7265D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -241,7 +257,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					E593CE6A1DF8FC3C00D7265D = {
@@ -328,6 +344,8 @@
 				3939196D21E39313009320F3 /* UIDevice.swift in Sources */,
 				394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */,
 				E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */,
+				3952ADBA29945AFA00B3835D /* CrossPlatformAppDelegate.swift in Sources */,
+				3952ADB729945AF700B3835D /* ConfigurationProxy.swift in Sources */,
 				39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */,
 				E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */,
 				3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */,
@@ -341,6 +359,7 @@
 			files = (
 				39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */,
 				E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */,
+				3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
