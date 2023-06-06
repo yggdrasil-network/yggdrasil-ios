@@ -8,45 +8,86 @@
 import Foundation
 import NetworkExtension
 import Yggdrasil
-import UIKit
+import SwiftUI
 
-class CrossPlatformAppDelegate: PlatformAppDelegate {
+#if os(iOS)
+class PlatformAppDelegate: UIResponder, UIApplicationDelegate {}
+typealias PlatformApplication = UIApplication
+typealias ApplicationDelegateAdaptor = UIApplicationDelegateAdaptor
+#elseif os(macOS)
+class PlatformAppDelegate: NSObject, NSApplicationDelegate {}
+typealias PlatformApplication = NSApplication
+typealias ApplicationDelegateAdaptor = NSApplicationDelegateAdaptor
+#endif
+
+class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     var vpnManager: NETunnelProviderManager = NETunnelProviderManager()
-
-    #if os(iOS)
     let yggdrasilComponent = "eu.neilalexander.yggdrasil.extension"
-    #elseif os(OSX)
-    let yggdrasilComponent = "eu.neilalexander.yggdrasilmac.extension"
-    #endif
     
-    var yggdrasilConfig: ConfigurationProxy? = nil
-    
-    var yggdrasilAdminTimer: DispatchSourceTimer?
-    
-    var yggdrasilSelfIP: String = "N/A"
-    var yggdrasilSelfSubnet: String = "N/A"
-    var yggdrasilSelfCoords: String = "[]"
-
-    var yggdrasilPeers: [[String: Any]] = [[:]]
-    var yggdrasilDHT: [[String: Any]] = [[:]]
-    var yggdrasilNodeInfo: [String: Any] = [:]
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        if self.yggdrasilAdminTimer == nil {
-            self.yggdrasilAdminTimer = DispatchSource.makeTimerSource(flags: .strict, queue: DispatchQueue(label: "Admin Queue"))
-            self.yggdrasilAdminTimer!.schedule(deadline: DispatchTime.now(), repeating: DispatchTimeInterval.seconds(2), leeway: DispatchTimeInterval.seconds(1))
-            self.yggdrasilAdminTimer!.setEventHandler {
-                self.makeIPCRequests()
-            }
-        }
-        if self.yggdrasilAdminTimer != nil {
-            self.yggdrasilAdminTimer!.resume()
-        }
+    override init() {
+        super.init()
+        
         NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: nil, queue: nil, using: { notification in
             if let conn = notification.object as? NEVPNConnection {
                 self.updateStatus(conn: conn)
             }
         })
+        
+        self.vpnTunnelProviderManagerInit()
+        self.makeIPCRequests()
+    }
+    
+    func toggleYggdrasil() {
+        if !self.yggdrasilEnabled {
+            print("Starting VPN tunnel")
+            do {
+                try self.vpnManager.connection.startVPNTunnel()
+            } catch {
+                print("Failed to start VPN tunnel: \(error.localizedDescription)")
+                return
+            }
+            print("Started VPN tunnel")
+        } else {
+            print("Stopping VPN tunnel")
+            self.vpnManager.connection.stopVPNTunnel()
+            print("Stopped VPN tunnel")
+        }
+        self.yggdrasilEnabled = !self.yggdrasilEnabled
+    }
+    
+    var yggdrasilConfig: ConfigurationProxy? = nil
+    
+    private var adminTimer: DispatchSourceTimer?
+    
+    @Published var yggdrasilEnabled: Bool = false
+    @Published var yggdrasilConnected: Bool = false
+    
+    @Published var yggdrasilIP: String = "N/A"
+    @Published var yggdrasilSubnet: String = "N/A"
+    @Published var yggdrasilCoords: String = "[]"
+
+    @Published var yggdrasilPeers: [[String: Any]] = [[:]]
+    @Published var yggdrasilDHT: [[String: Any]] = [[:]]
+    @Published var yggdrasilNodeInfo: [String: Any] = [:]
+    
+    func yggdrasilVersion() -> String {
+        return Yggdrasil.MobileGetVersion()
+    }
+    
+    func applicationDidBecomeActive(_ application: PlatformApplication) {
+        print("Application became active")
+        
+        if self.adminTimer == nil {
+            self.adminTimer = DispatchSource.makeTimerSource(flags: .strict, queue: DispatchQueue(label: "Admin Queue"))
+            self.adminTimer!.schedule(deadline: DispatchTime.now(), repeating: DispatchTimeInterval.seconds(2), leeway: DispatchTimeInterval.seconds(1))
+            self.adminTimer!.setEventHandler {
+                self.makeIPCRequests()
+            }
+        }
+        if self.adminTimer != nil {
+            self.adminTimer!.resume()
+        }
+        
         self.updateStatus(conn: self.vpnManager.connection)
     }
     
@@ -56,49 +97,70 @@ class CrossPlatformAppDelegate: PlatformAppDelegate {
         } else if conn.status == .disconnecting || conn.status == .disconnected {
             self.clearStatus()
         }
+        self.yggdrasilConnected = self.yggdrasilEnabled && self.yggdrasilPeers.count > 0 && self.yggdrasilDHT.count > 0
+        print("Connection status: \(yggdrasilEnabled), \(yggdrasilConnected)")
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
-        if self.yggdrasilAdminTimer != nil {
-            self.yggdrasilAdminTimer!.suspend()
+    func applicationWillResignActive(_ application: PlatformApplication) {
+        if self.adminTimer != nil {
+            self.adminTimer!.suspend()
         }
     }
     
     func vpnTunnelProviderManagerInit() {
+        print("Loading saved managers...")
+        
         NETunnelProviderManager.loadAllFromPreferences { (savedManagers: [NETunnelProviderManager]?, error: Error?) in
-            if let error = error {
-                print(error)
+            guard error == nil else {
+                print("Failed to load VPN managers: \(error?.localizedDescription ?? "(no error)")")
+                return
             }
             
-            if let savedManagers = savedManagers {
-                for manager in savedManagers {
-                    if (manager.protocolConfiguration as? NETunnelProviderProtocol)?.providerBundleIdentifier == self.yggdrasilComponent {
-                        print("Found saved VPN Manager")
-                        self.vpnManager = manager
-                    }
+            guard let savedManagers else {
+                print("Expected to find saved managers but didn't")
+                return
+            }
+            
+            print("Found \(savedManagers.count) saved VPN managers")
+            for manager in savedManagers {
+                guard let proto = manager.protocolConfiguration as? NETunnelProviderProtocol else {
+                    continue
                 }
+                guard let identifier = proto.providerBundleIdentifier else {
+                    continue
+                }
+                guard identifier == self.yggdrasilComponent else {
+                    continue
+                }
+                print("Found saved VPN Manager")
+                self.vpnManager = manager
+                break
             }
             
             self.vpnManager.loadFromPreferences(completionHandler: { (error: Error?) in
-                if let error = error {
-                    print(error)
+                if error == nil {
+                    if let vpnConfig = self.vpnManager.protocolConfiguration as? NETunnelProviderProtocol,
+                       let confJson = vpnConfig.providerConfiguration!["json"] as? Data {
+                        if let loaded = try? ConfigurationProxy(json: confJson) {
+                            print("Found existing protocol configuration")
+                            self.yggdrasilConfig = loaded
+                        } else {
+                            print("Existing protocol configuration is invalid, ignoring")
+                        }
+                    }
                 }
                 
-                if let vpnConfig = self.vpnManager.protocolConfiguration as? NETunnelProviderProtocol,
-                    let confJson = vpnConfig.providerConfiguration!["json"] as? Data {
-                    print("Found existing protocol configuration")
-                    self.yggdrasilConfig = try? ConfigurationProxy(json: confJson)
-                } else  {
+                if self.yggdrasilConfig == nil {
                     print("Generating new protocol configuration")
                     self.yggdrasilConfig = ConfigurationProxy()
+                    
+                    if let config = self.yggdrasilConfig {
+                        try? config.save(to: &self.vpnManager)
+                    }
                 }
                 
                 self.vpnManager.localizedDescription = "Yggdrasil"
                 self.vpnManager.isEnabled = true
-                
-                if let config = self.yggdrasilConfig {
-                    try? config.save(to: &self.vpnManager)
-                }
             })
         }
     }
@@ -110,19 +172,19 @@ class CrossPlatformAppDelegate: PlatformAppDelegate {
         if let session = self.vpnManager.connection as? NETunnelProviderSession {
             try? session.sendProviderMessage("address".data(using: .utf8)!) { (address) in
                 if let address = address {
-                    self.yggdrasilSelfIP = String(data: address, encoding: .utf8)!
+                    self.yggdrasilIP = String(data: address, encoding: .utf8)!
                     NotificationCenter.default.post(name: .YggdrasilSelfUpdated, object: nil)
                 }
             }
             try? session.sendProviderMessage("subnet".data(using: .utf8)!) { (subnet) in
                 if let subnet = subnet {
-                    self.yggdrasilSelfSubnet = String(data: subnet, encoding: .utf8)!
+                    self.yggdrasilSubnet = String(data: subnet, encoding: .utf8)!
                     NotificationCenter.default.post(name: .YggdrasilSelfUpdated, object: nil)
                 }
             }
             try? session.sendProviderMessage("coords".data(using: .utf8)!) { (coords) in
                 if let coords = coords {
-                    self.yggdrasilSelfCoords = String(data: coords, encoding: .utf8)!
+                    self.yggdrasilCoords = String(data: coords, encoding: .utf8)!
                     NotificationCenter.default.post(name: .YggdrasilSelfUpdated, object: nil)
                 }
             }
@@ -146,9 +208,9 @@ class CrossPlatformAppDelegate: PlatformAppDelegate {
     }
     
     func clearStatus() {
-        self.yggdrasilSelfIP = "N/A"
-        self.yggdrasilSelfSubnet = "N/A"
-        self.yggdrasilSelfCoords = "[]"
+        self.yggdrasilIP = "N/A"
+        self.yggdrasilSubnet = "N/A"
+        self.yggdrasilCoords = "[]"
         self.yggdrasilPeers = []
         self.yggdrasilDHT = []
         NotificationCenter.default.post(name: .YggdrasilSelfUpdated, object: nil)

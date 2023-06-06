@@ -71,7 +71,7 @@ class ConfigurationProxy: PlatformItemSource {
                     "Regex": "en.*",
                     "Beacon": true,
                     "Listen": true,
-                ]
+                ] as [String : Any]
             ])
         }
     }
@@ -185,11 +185,7 @@ class ConfigurationProxy: PlatformItemSource {
         self.fix()
         if let data = self.data() {
             let providerProtocol = NETunnelProviderProtocol()
-            #if os(iOS)
             providerProtocol.providerBundleIdentifier = "eu.neilalexander.yggdrasil.extension"
-            #elseif os(OSX)
-            providerProtocol.providerBundleIdentifier = "eu.neilalexander.yggdrasilmac.extension"
-            #endif
             providerProtocol.providerConfiguration = [ "json": data ]
             providerProtocol.serverAddress = "yggdrasil"
             providerProtocol.username = self.get("PublicKey") as? String ?? self.get("SigningPublicKey") as? String ?? "(unknown public key)"

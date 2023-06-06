@@ -1,11 +1,5 @@
 import UIKit
 
-#if os(iOS)
-class PlatformAppDelegate: UIResponder, UIApplicationDelegate {}
-#elseif os(OSX)
-class PlatformAppDelegate: NSObject, NSApplicationDelegate {}
-#endif
-
 @UIApplicationMain
 class AppDelegate: CrossPlatformAppDelegate {
     var window: UIWindow?

@@ -94,9 +94,9 @@ class TableViewController: UITableViewController {
     }
     
     @objc func onYggdrasilSelfUpdated(notification: NSNotification) {
-        statsSelfIP.text = app.yggdrasilSelfIP
-        statsSelfSubnet.text = app.yggdrasilSelfSubnet
-        statsSelfCoords.text = app.yggdrasilSelfCoords
+        statsSelfIP.text = app.yggdrasilIP
+        statsSelfSubnet.text = app.yggdrasilSubnet
+        statsSelfCoords.text = app.yggdrasilCoords
         
         statsSelfIPCell.layoutSubviews()
         statsSelfSubnetCell.layoutSubviews()
