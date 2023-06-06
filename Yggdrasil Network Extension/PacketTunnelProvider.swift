@@ -6,35 +6,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
     var yggdrasil: MobileYggdrasil = MobileYggdrasil()
     var yggdrasilConfig: ConfigurationProxy?
-    
-    private var readThread: Thread?
-    private var writeThread: Thread?
-    private let readBuffer = NSMutableData(length: 65535)
-    private let writeBuffer = Data(count: 65535)
-    
-    @objc func readPacketsFromTun() {
-        self.packetFlow.readPackets { (packets: [Data], protocols: [NSNumber]) in
-            autoreleasepool {
-                for packet in packets {
-                    try? self.yggdrasil.sendBuffer(packet, length: packet.count)
-                }
-            }
-            self.readPacketsFromTun()
-        }
-    }
-
-    @objc func writePacketsToTun() {
-        var n: Int = 0
-        let readData = Data(bytesNoCopy: readBuffer!.mutableBytes, count: 65535, deallocator: .none)
-        while true {
-            autoreleasepool {
-                try? self.yggdrasil.recvBuffer(readBuffer as Data?, ret0_: &n)
-                if n > 0 {
-                  self.packetFlow.writePackets([readData[..<n]], withProtocols: [NSNumber](repeating: AF_INET6 as NSNumber, count: 1))
-                }
-            }
-        }
-    }
 
     func startYggdrasil() -> Error? {
         var err: Error? = nil
@@ -81,18 +52,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     } else {
                         NSLog("Yggdrasil tunnel settings set successfully")
                         
-                        self.readThread = Thread(target: self, selector: #selector(self.readPacketsFromTun), object: nil)
-                        if let readThread = self.readThread {
-                            readThread.name = "TUN Packet Reader"
-                            readThread.qualityOfService = .utility
-                            readThread.start()
-                        }
-                        
-                        self.writeThread = Thread(target: self, selector: #selector(self.writePacketsToTun), object: nil)
-                        if let writeThread = self.writeThread {
-                            writeThread.name = "TUN Packet Writer"
-                            writeThread.qualityOfService = .utility
-                            writeThread.start()
+                        if let fd = self.tunnelFileDescriptor {
+                            do {
+                                try self.yggdrasil.takeOverTUN(fd)
+                            } catch {
+                                NSLog("Taking over TUN produced an error: " + error.localizedDescription)
+                                err = error
+                            }
                         }
                     }
                 }
@@ -121,8 +87,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        self.readThread?.cancel()
-        self.writeThread?.cancel()
         try? self.yggdrasil.stop()
         super.stopTunnel(with: reason, completionHandler: completionHandler)
     }
