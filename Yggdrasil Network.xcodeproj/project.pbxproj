@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */; };
+		391B72A82A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */; };
 		3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196A21E35A7C009320F3 /* PeersViewController.swift */; };
 		3939196D21E39313009320F3 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196C21E39313009320F3 /* UIDevice.swift */; };
 		3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197221E39815009320F3 /* ToggleTableViewCell.swift */; };
@@ -58,6 +59,9 @@
 		3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetworkExtension.entitlements; sourceTree = "<group>"; };
 		3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetwork.entitlements; sourceTree = "<group>"; };
 		3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		391B72A52A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PacketTunnelProvider+FileDescriptor.h"; sourceTree = "<group>"; };
+		391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PacketTunnelProvider+FileDescriptor.swift"; sourceTree = "<group>"; };
+		391B72A72A2FD90100896278 /* YggdrasilNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YggdrasilNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		3939196A21E35A7C009320F3 /* PeersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
 		3939196C21E39313009320F3 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		3939197221E39815009320F3 /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
@@ -206,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */,
+				391B72A52A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.h */,
+				391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */,
+				391B72A72A2FD90100896278 /* YggdrasilNetworkExtension-Bridging-Header.h */,
 				E593CE9D1DF905AF00D7265D /* Info.plist */,
 			);
 			path = "Yggdrasil Network Extension";
@@ -360,6 +367,7 @@
 				39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */,
 				E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */,
 				3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */,
+				391B72A82A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +616,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Yggdrasil Network Extension/YggdrasilNetworkExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
@@ -641,7 +649,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Yggdrasil Network Extension/YggdrasilNetworkExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
