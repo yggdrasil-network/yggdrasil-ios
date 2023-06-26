@@ -51,17 +51,11 @@
 
 /* Begin PBXFileReference section */
 		3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetworkExtension.entitlements; sourceTree = "<group>"; };
-		3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		391B72A52A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PacketTunnelProvider+FileDescriptor.h"; sourceTree = "<group>"; };
 		391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PacketTunnelProvider+FileDescriptor.swift"; sourceTree = "<group>"; };
 		391B72A72A2FD90100896278 /* YggdrasilNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YggdrasilNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
-		3939196A21E35A7C009320F3 /* PeersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersViewController.swift; sourceTree = "<group>"; };
-		3939196C21E39313009320F3 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
-		3939197221E39815009320F3 /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
-		394A1EB221DEA46400D9F553 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3952ADB629945AF700B3835D /* ConfigurationProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationProxy.swift; sourceTree = "<group>"; };
 		3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatformAppDelegate.swift; sourceTree = "<group>"; };
-		39682A382225AD15004FB670 /* CopyableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		3996AF37270328080070947D /* Yggdrasil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Yggdrasil.xcframework; sourceTree = "<group>"; };
 		39AE88382319C93F0010FFF6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		39B51A492997062E0059D29D /* PeersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersView.swift; sourceTree = "<group>"; };
@@ -74,12 +68,6 @@
 		39F020632996CD770093F603 /* YggdrasilSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilSwiftUI.entitlements; sourceTree = "<group>"; };
 		39F020652996CD770093F603 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		39F0206A2996CF260093F603 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E593CE701DF8FC3C00D7265D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		E593CE731DF8FC3C00D7265D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E593CE751DF8FC3C00D7265D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E593CE781DF8FC3C00D7265D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E593CE7A1DF8FC3C00D7265D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YggdrasilNetworkExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		E593CE9D1DF905AF00D7265D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,51 +94,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		39042D3121E4BDA20088A534 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				E593CE721DF8FC3C00D7265D /* Main.storyboard */,
-				E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		3939196E21E3979C009320F3 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				E593CE701DF8FC3C00D7265D /* TableViewController.swift */,
-				3939196A21E35A7C009320F3 /* PeersViewController.swift */,
-				394A1EB221DEA46400D9F553 /* SettingsViewController.swift */,
-				3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		3939196F21E397A9009320F3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				3939196C21E39313009320F3 /* UIDevice.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		3939197021E397BC009320F3 /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		3939197121E397D1009320F3 /* UI Components */ = {
-			isa = PBXGroup;
-			children = (
-				3939197221E39815009320F3 /* ToggleTableViewCell.swift */,
-				39682A382225AD15004FB670 /* CopyableLabel.swift */,
-			);
-			path = "UI Components";
-			sourceTree = "<group>";
-		};
 		3952ADB529945AE900B3835D /* Yggdrasil Network Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +141,6 @@
 			children = (
 				3952ADB529945AE900B3835D /* Yggdrasil Network Core */,
 				E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */,
-				E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */,
 				39F0205C2996CD760093F603 /* YggdrasilSwiftUI */,
 				E593CE6C1DF8FC3C00D7265D /* Products */,
 				399D032221DA775D0016354F /* Frameworks */,
@@ -212,20 +154,6 @@
 				39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */ = {
-			isa = PBXGroup;
-			children = (
-				39042D3121E4BDA20088A534 /* Storyboards */,
-				3939197021E397BC009320F3 /* Application */,
-				3939196F21E397A9009320F3 /* Extensions */,
-				3939196E21E3979C009320F3 /* View Controllers */,
-				3939197121E397D1009320F3 /* UI Components */,
-				E593CE751DF8FC3C00D7265D /* Assets.xcassets */,
-				E593CE7A1DF8FC3C00D7265D /* Info.plist */,
-			);
-			path = "Yggdrasil Network iOS";
 			sourceTree = "<group>";
 		};
 		E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */ = {
@@ -389,25 +317,6 @@
 			targetProxy = 39F99B352A48F70F0045BD10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		E593CE721DF8FC3C00D7265D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E593CE731DF8FC3C00D7265D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E593CE781DF8FC3C00D7265D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		39F020682996CD770093F603 /* Debug */ = {
