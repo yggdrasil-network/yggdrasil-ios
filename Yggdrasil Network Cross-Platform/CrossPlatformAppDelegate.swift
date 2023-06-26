@@ -65,6 +65,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
         }
     }
     
+    @Published var yggdrasilSupported: Bool = true
     @Published var yggdrasilConnected: Bool = false
     
     @Published var yggdrasilPublicKey: String = "N/A"
@@ -122,11 +123,13 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
         NETunnelProviderManager.loadAllFromPreferences { (savedManagers: [NETunnelProviderManager]?, error: Error?) in
             guard error == nil else {
                 print("Failed to load VPN managers: \(error?.localizedDescription ?? "(no error)")")
+                self.yggdrasilSupported = false
                 return
             }
             
             guard let savedManagers else {
                 print("Expected to find saved managers but didn't")
+                self.yggdrasilSupported = false
                 return
             }
             

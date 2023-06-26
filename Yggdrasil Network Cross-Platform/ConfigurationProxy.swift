@@ -64,7 +64,7 @@ class ConfigurationProxy: PlatformItemSource {
         self.set("Listen", to: [] as [String])
         self.set("AdminListen", to: "none")
         self.set("IfName", to: "dummy")
-        // self.set("Peers", to: ["tcp://172.22.97.1.5190", "tls://172.22.97.1:5191"])
+        self.set("Peers", to: ["tcp://172.22.97.1.5190", "tls://172.22.97.1:5191"])
         
         if self.get("AutoStart") == nil {
             self.set("AutoStart", to: ["Any": false, "WiFi": false, "Mobile": false, "Ethernet": false] as [String: Bool])

@@ -20,7 +20,9 @@ struct StatusView: View {
     @State private var statusBadgeText: String = "Not enabled"
     
     private func getStatusBadgeColor() -> SwiftUI.Color {
-        if !appDelegate.yggdrasilEnabled {
+        if !appDelegate.yggdrasilSupported {
+            return .gray
+        } else if !appDelegate.yggdrasilEnabled {
             return .gray
         } else if !appDelegate.yggdrasilConnected {
             return .yellow
@@ -30,7 +32,9 @@ struct StatusView: View {
     }
     
     private func getStatusBadgeText() -> String {
-        if !appDelegate.yggdrasilEnabled {
+        if !appDelegate.yggdrasilSupported {
+            return "Not supported on this device"
+        } else if !appDelegate.yggdrasilEnabled {
             return "Not enabled"
         } else if !appDelegate.yggdrasilConnected {
             return "No peers connected"
@@ -44,12 +48,16 @@ struct StatusView: View {
             Section(content: {
                 VStack(alignment: .leading) {
                     Toggle("Enable Yggdrasil", isOn: $appDelegate.yggdrasilEnabled)
+                        .disabled(!appDelegate.yggdrasilSupported)
                     HStack {
                         Image(systemName: "circlebadge.fill")
                             .foregroundColor(statusBadgeColor)
                             .onAppear(perform: {
                                 statusBadgeColor = getStatusBadgeColor()
                             })
+                            .onChange(of: appDelegate.yggdrasilSupported) { newValue in
+                                statusBadgeColor = getStatusBadgeColor()
+                            }
                             .onChange(of: appDelegate.yggdrasilEnabled) { newValue in
                                 statusBadgeColor = getStatusBadgeColor()
                             }
@@ -65,6 +73,9 @@ struct StatusView: View {
                             .onAppear(perform: {
                                 statusBadgeText = getStatusBadgeText()
                             })
+                            .onChange(of: appDelegate.yggdrasilSupported) { newValue in
+                                statusBadgeText = getStatusBadgeText()
+                            }
                             .onChange(of: appDelegate.yggdrasilEnabled) { newValue in
                                 statusBadgeText = getStatusBadgeText()
                             }

@@ -11,8 +11,6 @@ struct PeersView: View {
     // @Binding public var yggdrasilConfiguration: ConfigurationProxy
     @ObservedObject private var appDelegate = Application.appDelegate
     
-    @State private var peers = ["Paul", "Taylor", "Adele"]
-    
     var body: some View {
         Form {
             Section(content: {
@@ -24,7 +22,8 @@ struct PeersView: View {
 #if os(macOS)
                         Spacer()
                         Button(role: .destructive) {
-                            print("Deleting")
+                            // appDelegate.yggdrasilConfig.peers.remove { $0 == peerURI }
+                            // self.delete(at: appDelegate.yggdrasilConfig.peers.firstIndex { $0 == peerURI })
                         } label: {
                             Image(systemName: "xmark.circle.fill")
                         }
@@ -32,7 +31,20 @@ struct PeersView: View {
 #endif
                     }
                 }
-                .onDelete(perform: delete)
+                .onMove { indexSet, offset in
+                    appDelegate.yggdrasilConfig.peers.move(fromOffsets: indexSet, toOffset: offset)
+                }
+                .onDelete { indexSet in
+                    appDelegate.yggdrasilConfig.peers.remove(atOffsets: indexSet)
+                }
+                
+                Button {
+                    appDelegate.yggdrasilConfig.peers.append("foo")
+                } label: {
+                    Label("Add peer", systemImage: "plus")
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.accentColor)
                 
                 Text("Yggdrasil will automatically attempt to connect to configured peers when started. If you configure more than one peer, your device may carry traffic on behalf of other network nodes. Avoid this by configuring only a single peer. Data charges may apply when using mobile data.")
                     .font(.system(size: 11))
@@ -62,25 +74,16 @@ struct PeersView: View {
                 Text("Local connectivity")
             })
         }
-        #if os(iOS)
+#if os(iOS)
         .toolbar {
-            Button(role: nil, action: {
-                
-            }, label: {
-                Image(systemName: "plus")
-            })
-            EditButton()
+           // EditButton()
         }
-        #endif
+#endif
         .formStyle(.grouped)
         .navigationTitle("Peers")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.large)
         #endif
-    }
-    
-    func delete(at offsets: IndexSet) {
-       peers.remove(atOffsets: offsets)
     }
 }
 
