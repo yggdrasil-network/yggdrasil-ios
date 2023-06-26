@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var deviceName = ""
+    //@Binding public var yggdrasilConfiguration: ConfigurationProxy
+    @ObservedObject private var appDelegate = Application.appDelegate
     
-    @State private var autoStartOnWiFi = false
-    @State private var autoStartOnCellular = false
+    @State private var deviceName = ""
     
     var body: some View {
         Form {
@@ -22,8 +22,14 @@ struct SettingsView: View {
             })
             
             Section(content: {
-                Toggle("Wi-Fi", isOn: $autoStartOnWiFi)
-                Toggle("Mobile Network", isOn: $autoStartOnCellular)
+                Toggle("Any network connection", isOn: $appDelegate.yggdrasilConfig.autoStartAny)
+                Toggle("Wi-Fi networks", isOn: $appDelegate.yggdrasilConfig.autoStartWiFi)
+#if os(macOS)
+                Toggle("Ethernet networks", isOn: $appDelegate.yggdrasilConfig.autoStartEthernet)
+#endif
+#if os(iOS)
+                Toggle("Mobile data", isOn: $appDelegate.yggdrasilConfig.autoStartMobile)
+#endif
             }, header: {
                 Text("Automatically start when connected to")
             })
@@ -36,6 +42,7 @@ struct SettingsView: View {
                     #if os(macOS)
                     .buttonStyle(.link)
                     #endif
+                    .foregroundColor(.accentColor)
                     Text("Import configuration from another device, including the public key and Yggdrasil IP address.")
                         .font(.system(size: 11))
                         .foregroundColor(.gray)
@@ -48,6 +55,7 @@ struct SettingsView: View {
                     #if os(macOS)
                     .buttonStyle(.link)
                     #endif
+                    .foregroundColor(.accentColor)
                     Text("Configuration will be exported as a file. Your configuration contains your private key which is extremely sensitive. Do not share it with anyone.")
                         .font(.system(size: 11))
                         .foregroundColor(.gray)

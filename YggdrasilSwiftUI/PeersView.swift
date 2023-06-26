@@ -8,18 +8,32 @@
 import SwiftUI
 
 struct PeersView: View {
-    @State private var peers = ["Paul", "Taylor", "Adele"]
+    // @Binding public var yggdrasilConfiguration: ConfigurationProxy
+    @ObservedObject private var appDelegate = Application.appDelegate
     
-    @State private var multicastAdvertise = false
-    @State private var multicastListen = false
+    @State private var peers = ["Paul", "Taylor", "Adele"]
     
     var body: some View {
         Form {
             Section(content: {
-                ForEach(peers, id: \.self) { peer in
-                    Text(peer)
+                ForEach(Array(appDelegate.yggdrasilConfig.peers.enumerated()), id: \.offset) { index, peer in
+                    HStack() {
+                        Text(peer)
+                        //TextField("", text: $yggdrasilConfiguration.peers[index])
+                        //    .multilineTextAlignment(.leading)
+#if os(macOS)
+                        Spacer()
+                        Button(role: .destructive) {
+                            print("Deleting")
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                        .buttonStyle(.plain)
+#endif
+                    }
                 }
                 .onDelete(perform: delete)
+                
                 Text("Yggdrasil will automatically attempt to connect to configured peers when started. If you configure more than one peer, your device may carry traffic on behalf of other network nodes. Avoid this by configuring only a single peer. Data charges may apply when using mobile data.")
                     .font(.system(size: 11))
                     .foregroundColor(.gray)
@@ -28,7 +42,7 @@ struct PeersView: View {
             })
             
             Section(content: {
-                Toggle(isOn: $multicastAdvertise) {
+                Toggle(isOn: $appDelegate.yggdrasilConfig.multicastBeacons) {
                     VStack(alignment: .leading) {
                         Text("Discoverable over multicast")
                         Text("Make your device discoverable to other Yggdrasil nodes on the same Wi-Fi network.")
@@ -36,7 +50,7 @@ struct PeersView: View {
                             .foregroundColor(.gray)
                     }
                 }
-                Toggle(isOn: $multicastListen) {
+                Toggle(isOn: $appDelegate.yggdrasilConfig.multicastListen) {
                     VStack(alignment: .leading) {
                         Text("Search for multicast peers")
                         Text("Automatically connect to discoverable Yggdrasil nodes on the same Wi-Fi network.")

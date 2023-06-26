@@ -3,72 +3,54 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */; };
 		391B72A82A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */; };
-		3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196A21E35A7C009320F3 /* PeersViewController.swift */; };
-		3939196D21E39313009320F3 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939196C21E39313009320F3 /* UIDevice.swift */; };
-		3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939197221E39815009320F3 /* ToggleTableViewCell.swift */; };
-		394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A1EB221DEA46400D9F553 /* SettingsViewController.swift */; };
-		3952ADB729945AF700B3835D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
 		3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
-		3952ADBA29945AFA00B3835D /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */; };
-		39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39682A382225AD15004FB670 /* CopyableLabel.swift */; };
-		3996AF38270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
 		3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
-		39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AE88382319C93F0010FFF6 /* NetworkExtension.framework */; };
 		39B51A4A2997062E0059D29D /* PeersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B51A492997062E0059D29D /* PeersView.swift */; };
 		39B51A4B29994F240059D29D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
 		39B51A4C29994F350059D29D /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */; };
-		39B51A4D299951D60059D29D /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
-		39BF9FC62A2F5FA7000E7269 /* PacketTunnelProvider+FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BF9FC52A2F5FA7000E7269 /* PacketTunnelProvider+FileDescriptor.swift */; };
+		39B51A4D299951D60059D29D /* IPCResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* IPCResponses.swift */; };
 		39BF9FC72A2F6FFD000E7269 /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
-		39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
-		39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* NSNotification.swift */; };
+		39CC924D221DEDD3004960DC /* IPCResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* IPCResponses.swift */; };
 		39F0205E2996CD760093F603 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0205D2996CD760093F603 /* Application.swift */; };
 		39F020602996CD760093F603 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0205F2996CD760093F603 /* StatusView.swift */; };
 		39F020622996CD770093F603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F020612996CD770093F603 /* Assets.xcassets */; };
 		39F020662996CD770093F603 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F020652996CD770093F603 /* Preview Assets.xcassets */; };
 		39F0206B2996CF260093F603 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0206A2996CF260093F603 /* SettingsView.swift */; };
-		E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */; };
-		E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE701DF8FC3C00D7265D /* TableViewController.swift */; };
-		E593CE741DF8FC3C00D7265D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E593CE721DF8FC3C00D7265D /* Main.storyboard */; };
-		E593CE761DF8FC3C00D7265D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E593CE751DF8FC3C00D7265D /* Assets.xcassets */; };
-		E593CE791DF8FC3C00D7265D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E593CE771DF8FC3C00D7265D /* LaunchScreen.storyboard */; };
+		39F99B342A48F6E50045BD10 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AE88382319C93F0010FFF6 /* NetworkExtension.framework */; };
+		39F99B382A48F74F0045BD10 /* YggdrasilNetworkExtension.appex in CopyFiles */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */; };
-		E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E593CE9E1DF905AF00D7265D /* PBXContainerItemProxy */ = {
+		39F99B352A48F70F0045BD10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E593CE631DF8FC3C00D7265D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E593CE961DF905AF00D7265D;
-			remoteInfo = NEPacketTunnelVPNDemoTunnel;
+			remoteInfo = YggdrasilNetworkExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E593CEA41DF905B000D7265D /* Embed Foundation Extensions */ = {
+		39F99B372A48F7380045BD10 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E593CEA01DF905AF00D7265D /* YggdrasilNetworkExtension.appex in Embed Foundation Extensions */,
+				39F99B382A48F74F0045BD10 /* YggdrasilNetworkExtension.appex in CopyFiles */,
 			);
-			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetworkExtension.entitlements; sourceTree = "<group>"; };
-		3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilNetwork.entitlements; sourceTree = "<group>"; };
 		3913E9BF21DD3A51001E0EC7 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		391B72A52A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PacketTunnelProvider+FileDescriptor.h"; sourceTree = "<group>"; };
 		391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PacketTunnelProvider+FileDescriptor.swift"; sourceTree = "<group>"; };
@@ -84,9 +66,7 @@
 		39AE88382319C93F0010FFF6 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		39B51A492997062E0059D29D /* PeersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersView.swift; sourceTree = "<group>"; };
 		39BF9FC12A2E9E51000E7269 /* YggdrasilNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YggdrasilNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
-		39BF9FC22A2E9E52000E7269 /* PacketTunnelProvider+FileDescriptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PacketTunnelProvider+FileDescriptor.h"; sourceTree = "<group>"; };
-		39BF9FC52A2F5FA7000E7269 /* PacketTunnelProvider+FileDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PacketTunnelProvider+FileDescriptor.swift"; sourceTree = "<group>"; };
-		39CC924B221DEDCE004960DC /* NSNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.swift; sourceTree = "<group>"; };
+		39CC924B221DEDCE004960DC /* IPCResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCResponses.swift; sourceTree = "<group>"; };
 		39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F0205D2996CD760093F603 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		39F0205F2996CD760093F603 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
@@ -94,7 +74,6 @@
 		39F020632996CD770093F603 /* YggdrasilSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YggdrasilSwiftUI.entitlements; sourceTree = "<group>"; };
 		39F020652996CD770093F603 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		39F0206A2996CF260093F603 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E593CE6E1DF8FC3C00D7265D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E593CE701DF8FC3C00D7265D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E593CE731DF8FC3C00D7265D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,16 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F99B342A48F6E50045BD10 /* NetworkExtension.framework in Frameworks */,
 				39BF9FC72A2F6FFD000E7269 /* Yggdrasil.xcframework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E593CE681DF8FC3C00D7265D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3996AF38270328080070947D /* Yggdrasil.xcframework in Frameworks */,
-				39AE88392319C93F0010FFF6 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +156,7 @@
 			children = (
 				3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */,
 				3952ADB629945AF700B3835D /* ConfigurationProxy.swift */,
-				39CC924B221DEDCE004960DC /* NSNotification.swift */,
+				39CC924B221DEDCE004960DC /* IPCResponses.swift */,
 			);
 			name = "Yggdrasil Network Core";
 			path = "Yggdrasil Network Cross-Platform";
@@ -226,8 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				3952ADB529945AE900B3835D /* Yggdrasil Network Core */,
-				3913E99E21DB9B41001E0EC7 /* YggdrasilNetwork.entitlements */,
-				3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */,
 				E593CE981DF905AF00D7265D /* Yggdrasil Network Extension */,
 				E593CE6D1DF8FC3C00D7265D /* Yggdrasil Network iOS */,
 				39F0205C2996CD760093F603 /* YggdrasilSwiftUI */,
@@ -239,7 +208,6 @@
 		E593CE6C1DF8FC3C00D7265D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */,
 				E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */,
 				39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */,
 			);
@@ -266,6 +234,7 @@
 				E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */,
 				391B72A52A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.h */,
 				391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */,
+				3913E99C21DB9B1C001E0EC7 /* YggdrasilNetworkExtension.entitlements */,
 				391B72A72A2FD90100896278 /* YggdrasilNetworkExtension-Bridging-Header.h */,
 				E593CE9D1DF905AF00D7265D /* Info.plist */,
 				39BF9FC12A2E9E51000E7269 /* YggdrasilNetworkExtension-Bridging-Header.h */,
@@ -283,33 +252,16 @@
 				39F020572996CD760093F603 /* Sources */,
 				39F020582996CD760093F603 /* Frameworks */,
 				39F020592996CD760093F603 /* Resources */,
+				39F99B372A48F7380045BD10 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				39F99B362A48F70F0045BD10 /* PBXTargetDependency */,
 			);
 			name = YggdrasilSwiftUI;
 			productName = YggdrasilSwiftUI;
 			productReference = 39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */;
-			productType = "com.apple.product-type.application";
-		};
-		E593CE6A1DF8FC3C00D7265D /* YggdrasilNetwork */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E593CE7D1DF8FC3C00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetwork" */;
-			buildPhases = (
-				E593CE671DF8FC3C00D7265D /* Sources */,
-				E593CE681DF8FC3C00D7265D /* Frameworks */,
-				E593CE691DF8FC3C00D7265D /* Resources */,
-				E593CEA41DF905B000D7265D /* Embed Foundation Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E593CE9F1DF905AF00D7265D /* PBXTargetDependency */,
-			);
-			name = YggdrasilNetwork;
-			productName = NEPacketTunnelVPNDemo;
-			productReference = E593CE6B1DF8FC3C00D7265D /* YggdrasilNetwork.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */ = {
@@ -335,30 +287,13 @@
 		E593CE631DF8FC3C00D7265D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					39F0205A2996CD760093F603 = {
 						CreatedOnToolsVersion = 14.2;
-					};
-					E593CE6A1DF8FC3C00D7265D = {
-						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 1030;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-							com.apple.NetworkExtensions.iOS = {
-								enabled = 1;
-							};
-							com.apple.VPNLite = {
-								enabled = 1;
-							};
-							com.apple.iCloud = {
-								enabled = 0;
-							};
-						};
 					};
 					E593CE961DF905AF00D7265D = {
 						CreatedOnToolsVersion = 8.1;
@@ -390,7 +325,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E593CE6A1DF8FC3C00D7265D /* YggdrasilNetwork */,
 				E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */,
 				39F0205A2996CD760093F603 /* YggdrasilSwiftUI */,
 			);
@@ -404,16 +338,6 @@
 			files = (
 				39F020662996CD770093F603 /* Preview Assets.xcassets in Resources */,
 				39F020622996CD770093F603 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E593CE691DF8FC3C00D7265D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E593CE791DF8FC3C00D7265D /* LaunchScreen.storyboard in Resources */,
-				E593CE761DF8FC3C00D7265D /* Assets.xcassets in Resources */,
-				E593CE741DF8FC3C00D7265D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,27 +359,9 @@
 				39F0206B2996CF260093F603 /* SettingsView.swift in Sources */,
 				39B51A4A2997062E0059D29D /* PeersView.swift in Sources */,
 				39F020602996CD760093F603 /* StatusView.swift in Sources */,
-				39B51A4D299951D60059D29D /* NSNotification.swift in Sources */,
+				39B51A4D299951D60059D29D /* IPCResponses.swift in Sources */,
 				39B51A4C29994F350059D29D /* CrossPlatformAppDelegate.swift in Sources */,
 				39F0205E2996CD760093F603 /* Application.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E593CE671DF8FC3C00D7265D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3939196B21E35A7C009320F3 /* PeersViewController.swift in Sources */,
-				3939197321E39815009320F3 /* ToggleTableViewCell.swift in Sources */,
-				3939196D21E39313009320F3 /* UIDevice.swift in Sources */,
-				394A1EB321DEA46400D9F553 /* SettingsViewController.swift in Sources */,
-				E593CE711DF8FC3C00D7265D /* TableViewController.swift in Sources */,
-				3952ADBA29945AFA00B3835D /* CrossPlatformAppDelegate.swift in Sources */,
-				3952ADB729945AF700B3835D /* ConfigurationProxy.swift in Sources */,
-				39682A392225AD15004FB670 /* CopyableLabel.swift in Sources */,
-				E593CE6F1DF8FC3C00D7265D /* AppDelegate.swift in Sources */,
-				3913E9C021DD3A51001E0EC7 /* SplitViewController.swift in Sources */,
-				39CC924C221DEDCE004960DC /* NSNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39CC924D221DEDD3004960DC /* NSNotification.swift in Sources */,
+				39CC924D221DEDD3004960DC /* IPCResponses.swift in Sources */,
 				E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */,
 				3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */,
 				391B72A82A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift in Sources */,
@@ -473,10 +379,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E593CE9F1DF905AF00D7265D /* PBXTargetDependency */ = {
+		39F99B362A48F70F0045BD10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
 			target = E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */;
-			targetProxy = E593CE9E1DF905AF00D7265D /* PBXContainerItemProxy */;
+			targetProxy = 39F99B352A48F70F0045BD10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -505,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -512,12 +423,14 @@
 				CODE_SIGN_ENTITLEMENTS = YggdrasilSwiftUI/YggdrasilSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"YggdrasilSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Yggdrasil;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -535,13 +448,16 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.YggdrasilSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Debug;
 		};
@@ -550,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -557,12 +474,14 @@
 				CODE_SIGN_ENTITLEMENTS = YggdrasilSwiftUI/YggdrasilSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"YggdrasilSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = R9AV23TXF2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Yggdrasil;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -579,13 +498,16 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.YggdrasilSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Release;
 		};
@@ -711,72 +633,6 @@
 			};
 			name = Release;
 		};
-		E593CE7E1DF8FC3C00D7265D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
-				DEVELOPMENT_TEAM = R9AV23TXF2;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		E593CE7F1DF8FC3C00D7265D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = YggdrasilNetwork.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
-				DEVELOPMENT_TEAM = R9AV23TXF2;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Yggdrasil Network iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		E593CEA11DF905AF00D7265D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -801,7 +657,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Yggdrasil Network Extension/YggdrasilNetworkExtension-Bridging-Header.h";
@@ -860,15 +715,6 @@
 			buildConfigurations = (
 				E593CE7B1DF8FC3C00D7265D /* Debug */,
 				E593CE7C1DF8FC3C00D7265D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E593CE7D1DF8FC3C00D7265D /* Build configuration list for PBXNativeTarget "YggdrasilNetwork" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E593CE7E1DF8FC3C00D7265D /* Debug */,
-				E593CE7F1DF8FC3C00D7265D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -14,8 +14,6 @@ typealias MyListStyle = SidebarListStyle
 #endif
 
 struct StatusView: View {
-    @Binding public var yggdrasilConfiguration: ConfigurationProxy
-    
     @ObservedObject private var appDelegate = Application.appDelegate
     
     @State private var statusBadgeColor: SwiftUI.Color = .gray
@@ -35,9 +33,9 @@ struct StatusView: View {
         if !appDelegate.yggdrasilEnabled {
             return "Not enabled"
         } else if !appDelegate.yggdrasilConnected {
-            return "Not connected"
+            return "No peers connected"
         } else {
-            return "Connected"
+            return "Connected to \(appDelegate.yggdrasilPeers.count) peer(s)"
         }
     }
     
@@ -46,9 +44,6 @@ struct StatusView: View {
             Section(content: {
                 VStack(alignment: .leading) {
                     Toggle("Enable Yggdrasil", isOn: $appDelegate.yggdrasilEnabled)
-                        .onTapGesture {
-                            appDelegate.toggleYggdrasil()
-                        }
                     HStack {
                         Image(systemName: "circlebadge.fill")
                             .foregroundColor(statusBadgeColor)
@@ -58,6 +53,12 @@ struct StatusView: View {
                             .onChange(of: appDelegate.yggdrasilEnabled) { newValue in
                                 statusBadgeColor = getStatusBadgeColor()
                             }
+                            .onChange(of: appDelegate.yggdrasilConnected) { newValue in
+                                statusBadgeColor = getStatusBadgeColor()
+                            }
+                            .onChange(of: appDelegate.yggdrasilPeers.count) { newValue in
+                                statusBadgeColor = getStatusBadgeColor()
+                            }
                         Text(statusBadgeText)
                             .foregroundColor(.gray)
                             .font(.system(size: 11))
@@ -65,6 +66,12 @@ struct StatusView: View {
                                 statusBadgeText = getStatusBadgeText()
                             })
                             .onChange(of: appDelegate.yggdrasilEnabled) { newValue in
+                                statusBadgeText = getStatusBadgeText()
+                            }
+                            .onChange(of: appDelegate.yggdrasilConnected) { newValue in
+                                statusBadgeText = getStatusBadgeText()
+                            }
+                            .onChange(of: appDelegate.yggdrasilPeers.count) { newValue in
                                 statusBadgeText = getStatusBadgeText()
                             }
                     }
@@ -83,29 +90,38 @@ struct StatusView: View {
                     Spacer()
                     Text(appDelegate.yggdrasilIP)
                         .foregroundColor(Color.gray)
+                        .truncationMode(.head)
+                        .lineLimit(1)
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Subnet")
                     Spacer()
                     Text(appDelegate.yggdrasilSubnet)
                         .foregroundColor(Color.gray)
+                        .truncationMode(.head)
+                        .lineLimit(1)
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Coordinates")
                     Spacer()
                     Text(appDelegate.yggdrasilCoords)
                         .foregroundColor(Color.gray)
+                        .truncationMode(.tail)
+                        .lineLimit(1)
+                        .textSelection(.enabled)
                 }
-                /*
                 HStack {
                     Text("Public Key")
                     Spacer()
-                    Text("N/A")
+                    Text(appDelegate.yggdrasilPublicKey)
                         .foregroundColor(Color.gray)
-                        .font(.system(size: 15, design: .monospaced))
+                        .font(.system(size: 13, design: .monospaced))
                         .truncationMode(.tail)
+                        .lineLimit(1)
+                        .textSelection(.enabled)
                 }
-                 */
             })
         }
         .formStyle(.grouped)
@@ -118,8 +134,6 @@ struct StatusView: View {
 
 struct StatusView_Previews: PreviewProvider {
     static var previews: some View {
-        @State var config = ConfigurationProxy()
-        
-        StatusView(yggdrasilConfiguration: $config)
+        StatusView()
     }
 }

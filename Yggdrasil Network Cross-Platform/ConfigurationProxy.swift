@@ -10,6 +10,7 @@ import UIKit
 #elseif canImport(AppKit)
 import AppKit
 #endif
+import SwiftUI
 import Yggdrasil
 import NetworkExtension
 
@@ -28,12 +29,14 @@ class PlatformItemSource: NSObject {}
 #endif
 
 class ConfigurationProxy: PlatformItemSource {
-
+    private var manager: NETunnelProviderManager?
     private var json: Data? = nil
     private var dict: [String: Any]? = nil
     
-    override init() {
+    init(manager: NETunnelProviderManager? = nil) {
+        self.manager = manager
         super.init()
+        
         self.json = MobileGenerateConfigJSON()
         do {
             try self.convertToDict()
@@ -48,8 +51,10 @@ class ConfigurationProxy: PlatformItemSource {
         self.fix()
     }
     
-    init(json: Data) throws {
+    init(json: Data, manager: NETunnelProviderManager? = nil) throws {
+        self.manager = manager
         super.init()
+        
         self.json = json
         try self.convertToDict()
         self.fix()
@@ -59,9 +64,10 @@ class ConfigurationProxy: PlatformItemSource {
         self.set("Listen", to: [] as [String])
         self.set("AdminListen", to: "none")
         self.set("IfName", to: "dummy")
+        // self.set("Peers", to: ["tcp://172.22.97.1.5190", "tls://172.22.97.1:5191"])
         
         if self.get("AutoStart") == nil {
-            self.set("AutoStart", to: ["WiFi": false, "Mobile": false] as [String: Bool])
+            self.set("AutoStart", to: ["Any": false, "WiFi": false, "Mobile": false, "Ethernet": false] as [String: Bool])
         }
         
         let multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
@@ -88,6 +94,7 @@ class ConfigurationProxy: PlatformItemSource {
             var multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
             multicastInterfaces[0]["Beacon"] = newValue
             self.set("MulticastInterfaces", to: multicastInterfaces)
+            self.trySave()
         }
     }
     
@@ -103,10 +110,61 @@ class ConfigurationProxy: PlatformItemSource {
             var multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
             multicastInterfaces[0]["Listen"] = newValue
             self.set("MulticastInterfaces", to: multicastInterfaces)
+            self.trySave()
+        }
+    }
+                                    
+   public var autoStartAny: Bool {
+       get {
+           return self.get("Any", inSection: "AutoStart") as? Bool ?? false
+       }
+       set {
+           self.set("Any", inSection: "AutoStart", to: newValue)
+           self.trySave()
+       }
+   }
+    
+    public var autoStartWiFi: Bool {
+        get {
+            return self.get("WiFi", inSection: "AutoStart") as? Bool ?? false
+        }
+        set {
+            self.set("WiFi", inSection: "AutoStart", to: newValue)
+            self.trySave()
         }
     }
     
-    func get(_ key: String) -> Any? {
+    public var autoStartEthernet: Bool {
+        get {
+            return self.get("Ethernet", inSection: "AutoStart") as? Bool ?? false
+        }
+        set {
+            self.set("Ethernet", inSection: "AutoStart", to: newValue)
+            self.trySave()
+        }
+    }
+    
+    public var autoStartMobile: Bool {
+        get {
+            return self.get("Mobile", inSection: "AutoStart") as? Bool ?? false
+        }
+        set {
+            self.set("Mobile", inSection: "AutoStart", to: newValue)
+            self.trySave()
+        }
+    }
+    
+    public var peers: [String] {
+        get {
+            return self.get("Peers") as? [String] ?? []
+        }
+        set {
+            self.set("Peers", to: newValue)
+            self.trySave()
+        }
+    }
+    
+    private func get(_ key: String) -> Any? {
         if let dict = self.dict {
             if dict.keys.contains(key) {
                 return dict[key]
@@ -115,7 +173,7 @@ class ConfigurationProxy: PlatformItemSource {
         return nil
     }
     
-    func get(_ key: String, inSection section: String) -> Any? {
+    private func get(_ key: String, inSection section: String) -> Any? {
         if let dict = self.get(section) as? [String: Any] {
             if dict.keys.contains(key) {
                 return dict[key]
@@ -124,7 +182,7 @@ class ConfigurationProxy: PlatformItemSource {
         return nil
     }
     
-    func add(_ value: Any, in key: String) {
+    private func add(_ value: Any, in key: String) {
         if self.dict != nil {
             if self.dict![key] as? [Any] != nil {
                 var temp = self.dict![key] as? [Any] ?? []
@@ -134,7 +192,7 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
-    func remove(_ value: String, from key: String) {
+    private func remove(_ value: String, from key: String) {
         if self.dict != nil {
             if self.dict![key] as? [String] != nil {
                 var temp = self.dict![key] as? [String] ?? []
@@ -146,7 +204,7 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
-    func remove(index: Int, from key: String) {
+    private func remove(index: Int, from key: String) {
         if self.dict != nil {
             if self.dict![key] as? [Any] != nil {
                 var temp = self.dict![key] as? [Any] ?? []
@@ -156,13 +214,13 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
-    func set(_ key: String, to value: Any) {
+    private func set(_ key: String, to value: Any) {
         if self.dict != nil {
             self.dict![key] = value
         }
     }
     
-    func set(_ key: String, inSection section: String, to value: Any?) {
+    private func set(_ key: String, inSection section: String, to value: Any?) {
         if self.dict != nil {
             if self.dict!.keys.contains(section), let value = value {
                 var temp = self.dict![section] as? [String: Any] ?? [:]
@@ -181,6 +239,12 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
+    private func trySave() {
+        if var manager = self.manager {
+            try? self.save(to: &manager)
+        }
+    }
+    
     func save(to manager: inout NETunnelProviderManager) throws {
         self.fix()
         if let data = self.data() {
@@ -192,6 +256,18 @@ class ConfigurationProxy: PlatformItemSource {
             
             let disconnectrule = NEOnDemandRuleDisconnect()
             var rules: [NEOnDemandRule] = [disconnectrule]
+            if self.get("Any", inSection: "AutoStart") as? Bool ?? false {
+                let wifirule = NEOnDemandRuleConnect()
+                wifirule.interfaceTypeMatch = .any
+                rules.insert(wifirule, at: 0)
+            }
+            #if os(macOS)
+            if self.get("Ethernet", inSection: "AutoStart") as? Bool ?? false {
+                let wifirule = NEOnDemandRuleConnect()
+                wifirule.interfaceTypeMatch = .ethernet
+                rules.insert(wifirule, at: 0)
+            }
+            #endif
             if self.get("WiFi", inSection: "AutoStart") as? Bool ?? false {
                 let wifirule = NEOnDemandRuleConnect()
                 wifirule.interfaceTypeMatch = .wiFi
@@ -214,8 +290,7 @@ class ConfigurationProxy: PlatformItemSource {
                 if let error = error {
                     print(error)
                 } else {
-                    print("Save successfully")
-                    NotificationCenter.default.post(name: NSNotification.Name.YggdrasilSettingsUpdated, object: self)
+                    print("Saved successfully")
                 }
             })
         }

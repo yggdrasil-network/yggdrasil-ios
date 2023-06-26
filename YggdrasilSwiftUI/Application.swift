@@ -10,20 +10,21 @@ import NetworkExtension
 
 @main
 struct Application: App {
+    @State private var selection: String? = "Status"
+    
     #if os(iOS)
     @UIApplicationDelegateAdaptor(CrossPlatformAppDelegate.self) static var appDelegate: CrossPlatformAppDelegate
     #elseif os(macOS)
     @NSApplicationDelegateAdaptor(CrossPlatformAppDelegate.self) static var appDelegate: CrossPlatformAppDelegate
     #endif
     
-    @State private var selection: String? = "Status"
-    @State private var config: ConfigurationProxy = ConfigurationProxy()
-
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
                 List(selection: $selection) {
-                    NavigationLink(destination: StatusView(yggdrasilConfiguration: $config)) {
+                    NavigationLink(destination: StatusView()) {
                         HStack {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.accentColor)
@@ -50,11 +51,30 @@ struct Application: App {
                 }
                 .listStyle(.sidebar)
                 .navigationSplitViewColumnWidth(200)
+                
+                Image("YggdrasilLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(.primary)
+                    .opacity(0.1)
+                    .padding(.all, 24.0)
             } detail: {
-                StatusView(yggdrasilConfiguration: $config)
+                StatusView()
             }
             .navigationTitle("Yggdrasil")
             .navigationSplitViewStyle(.automatic)
+            .onChange(of: scenePhase) { phase in
+                switch phase {
+                case .background:
+                    Application.appDelegate.becameBackground()
+                case .inactive:
+                    Application.appDelegate.becameInactive()
+                case .active:
+                    Application.appDelegate.becameActive()
+                @unknown default:
+                    break
+                }
+            }
         }
         #if os(macOS)
         .windowStyle(.hiddenTitleBar)

@@ -55,6 +55,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                         if let fd = self.tunnelFileDescriptor {
                             do {
                                 try self.yggdrasil.takeOverTUN(fd)
+                                NSLog("Yggdrasil taken over TUN successfully")
                             } catch {
                                 NSLog("Taking over TUN produced an error: " + error.localizedDescription)
                                 err = error
@@ -82,6 +83,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     NSLog("Yggdrasil completion handler called")
                     completionHandler(nil)
                 }
+            } else {
+                NSLog("Error in Yggdrasil startTunnel: No configuration JSON found")
             }
         }
     }
@@ -94,16 +97,27 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)? = nil) {
         let request = String(data: messageData, encoding: .utf8)
         switch request {
-        case "address":
-            completionHandler?(self.yggdrasil.getAddressString().data(using: .utf8))
-        case "subnet":
-            completionHandler?(self.yggdrasil.getSubnetString().data(using: .utf8))
-        case "coords":
-            completionHandler?(self.yggdrasil.getCoordsString().data(using: .utf8))
-        case "peers":
-            completionHandler?(self.yggdrasil.getPeersJSON().data(using: .utf8))
-        case "dht":
-            completionHandler?(self.yggdrasil.getDHTJSON().data(using: .utf8))
+        case "summary":
+            let summary = YggdrasilSummary(
+                address: self.yggdrasil.getAddressString(),
+                subnet: self.yggdrasil.getSubnetString(),
+                publicKey: self.yggdrasil.getPublicKeyString()
+            )
+            if let json = try? JSONEncoder().encode(summary) {
+                completionHandler?(json)
+            }
+            
+        case "status":
+            let status = YggdrasilStatus(
+                enabled: true,
+                coords: self.yggdrasil.getCoordsString(),
+                peers: self.yggdrasil.getPeersJSON().data(using: .utf8) ?? Data(),
+                dht: self.yggdrasil.getDHTJSON().data(using: .utf8) ?? Data()
+            )
+            if let json = try? JSONEncoder().encode(status) {
+                completionHandler?(json)
+            }
+
         default:
             completionHandler?(nil)
         }
