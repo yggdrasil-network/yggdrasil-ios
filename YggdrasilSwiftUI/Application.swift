@@ -23,41 +23,47 @@ struct Application: App {
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
-                List(selection: $selection) {
-                    NavigationLink(destination: StatusView()) {
-                        HStack {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.accentColor)
-                                .frame(minWidth: 24)
-                            Text("Status")
+                ZStack {
+                    List(selection: $selection) {
+                        NavigationLink(destination: StatusView()) {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                    .foregroundColor(.accentColor)
+                                    .frame(minWidth: 24)
+                                Text("Status")
+                            }
+                        }
+                        NavigationLink(destination: PeersView()) {
+                            HStack {
+                                Image(systemName: "antenna.radiowaves.left.and.right")
+                                    .foregroundColor(.accentColor)
+                                    .frame(minWidth: 24)
+                                Text("Peers")
+                            }
+                        }
+                        NavigationLink(destination: SettingsView()) {
+                            HStack {
+                                Image(systemName: "gear")
+                                    .foregroundColor(.accentColor)
+                                    .frame(minWidth: 24)
+                                Text("Settings")
+                            }
                         }
                     }
-                    NavigationLink(destination: PeersView()) {
-                        HStack {
-                            Image(systemName: "antenna.radiowaves.left.and.right")
-                                .foregroundColor(.accentColor)
-                                .frame(minWidth: 24)
-                            Text("Peers")
-                        }
-                    }
-                    NavigationLink(destination: SettingsView()) {
-                        HStack {
-                            Image(systemName: "gear")
-                                .foregroundColor(.accentColor)
-                                .frame(minWidth: 24)
-                            Text("Settings")
-                        }
-                    }
+                    //.listStyle(.sidebar)
+                    //.navigationSplitViewColumnWidth(200)
+                    
+                    Image("YggdrasilLogo")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.primary)
+                        .opacity(0.1)
+                        .frame(maxWidth: 200, alignment: .bottom)
+                        .padding(.all, 24)
                 }
-                .listStyle(.sidebar)
                 .navigationSplitViewColumnWidth(200)
-                
-                Image("YggdrasilLogo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.primary)
-                    .opacity(0.1)
-                    .padding(.all, 24.0)
+                .listStyle(.sidebar)
             } detail: {
                 StatusView()
             }
