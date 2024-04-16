@@ -93,6 +93,8 @@ struct StatusView: View {
                     Text(appDelegate.yggdrasilVersion())
                         .foregroundColor(Color.gray)
                 }
+            }, header: {
+                Text("Status")
             })
             
             Section(content: {
@@ -114,7 +116,7 @@ struct StatusView: View {
                         .lineLimit(1)
                         .textSelection(.enabled)
                 }
-                HStack {
+                /*HStack {
                     Text("Coordinates")
                     Spacer()
                     Text(appDelegate.yggdrasilCoords)
@@ -122,7 +124,7 @@ struct StatusView: View {
                         .truncationMode(.tail)
                         .lineLimit(1)
                         .textSelection(.enabled)
-                }
+                }*/
                 HStack {
                     Text("Public Key")
                     Spacer()
@@ -133,7 +135,35 @@ struct StatusView: View {
                         .lineLimit(1)
                         .textSelection(.enabled)
                 }
+            }, header: {
+                Text("Details")
             })
+            
+            if self.appDelegate.yggdrasilEnabled {
+                Section(content: {
+                    List(self.appDelegate.yggdrasilPeers.sorted(by: { a, b in
+                        a.key < a.key
+                    }), id: \.remote) { peer in
+                        VStack {
+                            Text(peer.remote)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .truncationMode(.tail)
+                                .lineLimit(1)
+                                .textSelection(.enabled)
+                            Text(peer.address)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 11, design: .monospaced))
+                                .truncationMode(.tail)
+                                .lineLimit(1)
+                                .textSelection(.enabled)
+                        }
+                        .padding(.all, 2)
+                    }
+                }, header: {
+                    Text("Peers")
+                })
+            }
         }
         .formStyle(.grouped)
         .navigationTitle("Yggdrasil")

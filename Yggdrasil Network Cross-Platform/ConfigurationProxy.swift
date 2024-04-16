@@ -13,6 +13,8 @@ import AppKit
 import SwiftUI
 import Yggdrasil
 import NetworkExtension
+import Foundation
+import CoreData
 
 #if os(iOS)
 class PlatformItemSource: NSObject, UIActivityItemSource {
@@ -31,9 +33,10 @@ class PlatformItemSource: NSObject {}
 class ConfigurationProxy: PlatformItemSource {
     private var manager: NETunnelProviderManager?
     private var json: Data? = nil
-    private var dict: [String: Any]? = nil
+    private var dict: [String: Any]? = [:]
+    private var timer: Timer?
     
-    init(manager: NETunnelProviderManager? = nil) {
+    init(manager: NETunnelProviderManager) {
         self.manager = manager
         super.init()
         
@@ -64,14 +67,13 @@ class ConfigurationProxy: PlatformItemSource {
         self.set("Listen", to: [] as [String])
         self.set("AdminListen", to: "none")
         self.set("IfName", to: "dummy")
-        self.set("Peers", to: ["tcp://172.22.97.1.5190", "tls://172.22.97.1:5191"])
         
         if self.get("AutoStart") == nil {
             self.set("AutoStart", to: ["Any": false, "WiFi": false, "Mobile": false, "Ethernet": false] as [String: Bool])
         }
         
         let multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
-        if multicastInterfaces.count == 0 {
+        if multicastInterfaces.count != 1 {
             self.set("MulticastInterfaces", to: [
                 [
                     "Regex": "en.*",
@@ -94,7 +96,7 @@ class ConfigurationProxy: PlatformItemSource {
             var multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
             multicastInterfaces[0]["Beacon"] = newValue
             self.set("MulticastInterfaces", to: multicastInterfaces)
-            self.trySave()
+            self.saveSoon()
         }
     }
     
@@ -110,7 +112,23 @@ class ConfigurationProxy: PlatformItemSource {
             var multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
             multicastInterfaces[0]["Listen"] = newValue
             self.set("MulticastInterfaces", to: multicastInterfaces)
-            self.trySave()
+            self.saveSoon()
+        }
+    }
+    
+    public var multicastPassword: String {
+        get {
+            let multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
+            if multicastInterfaces.count == 0 {
+                return ""
+            }
+            return multicastInterfaces[0]["Password"] as? String ?? ""
+        }
+        set {
+            var multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
+            multicastInterfaces[0]["Password"] = newValue
+            self.set("MulticastInterfaces", to: multicastInterfaces)
+            self.saveSoon()
         }
     }
                                     
@@ -120,7 +138,7 @@ class ConfigurationProxy: PlatformItemSource {
        }
        set {
            self.set("Any", inSection: "AutoStart", to: newValue)
-           self.trySave()
+           self.saveSoon()
        }
    }
     
@@ -130,7 +148,7 @@ class ConfigurationProxy: PlatformItemSource {
         }
         set {
             self.set("WiFi", inSection: "AutoStart", to: newValue)
-            self.trySave()
+            self.saveSoon()
         }
     }
     
@@ -140,7 +158,7 @@ class ConfigurationProxy: PlatformItemSource {
         }
         set {
             self.set("Ethernet", inSection: "AutoStart", to: newValue)
-            self.trySave()
+            self.saveSoon()
         }
     }
     
@@ -150,7 +168,17 @@ class ConfigurationProxy: PlatformItemSource {
         }
         set {
             self.set("Mobile", inSection: "AutoStart", to: newValue)
-            self.trySave()
+            self.saveSoon()
+        }
+    }
+    
+    public var deviceName: String {
+        get {
+            return self.get("name", inSection: "NodeInfo") as? String ?? ""
+        }
+        set {
+            self.set("name", inSection: "NodeInfo", to: newValue)
+            self.saveSoon()
         }
     }
     
@@ -160,7 +188,7 @@ class ConfigurationProxy: PlatformItemSource {
         }
         set {
             self.set("Peers", to: newValue)
-            self.trySave()
+            self.saveSoon()
         }
     }
     
@@ -239,10 +267,22 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
-    private func trySave() {
+    private func saveSoon() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(saveFromTimer),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+    
+    @objc private func saveFromTimer() {
         if var manager = self.manager {
             try? self.save(to: &manager)
         }
+        self.timer = nil
     }
     
     func save(to manager: inout NETunnelProviderManager) throws {
@@ -253,6 +293,8 @@ class ConfigurationProxy: PlatformItemSource {
             providerProtocol.providerConfiguration = [ "json": data ]
             providerProtocol.serverAddress = "yggdrasil"
             providerProtocol.username = self.get("PublicKey") as? String ?? self.get("SigningPublicKey") as? String ?? "(unknown public key)"
+            
+            NSLog(String(data: data, encoding: .utf8) ?? "(unknown)")
             
             let disconnectrule = NEOnDemandRuleDisconnect()
             var rules: [NEOnDemandRule] = [disconnectrule]
@@ -283,10 +325,10 @@ class ConfigurationProxy: PlatformItemSource {
             manager.onDemandRules = rules
             manager.isOnDemandEnabled = rules.count > 1
             providerProtocol.disconnectOnSleep = rules.count > 1
-            
+
             manager.protocolConfiguration = providerProtocol
             
-            manager.saveToPreferences(completionHandler: { (error:Error?) in
+            manager.saveToPreferences(completionHandler: { error in
                 if let error = error {
                     print(error)
                 } else {

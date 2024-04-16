@@ -98,23 +98,26 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let request = String(data: messageData, encoding: .utf8)
         switch request {
         case "summary":
+            let pj = self.yggdrasil.getPeersJSON()
+            var peers: [YggdrasilPeer] = []
+            do {
+                peers = try JSONDecoder().decode(
+                    [YggdrasilPeer].self,
+                    from: pj.data(using: .utf8)!
+                )
+            } catch {
+                NSLog("JSON Error: \(error)")
+            }
             let summary = YggdrasilSummary(
                 address: self.yggdrasil.getAddressString(),
                 subnet: self.yggdrasil.getSubnetString(),
-                publicKey: self.yggdrasil.getPublicKeyString()
+                publicKey: self.yggdrasil.getPublicKeyString(),
+                enabled: true,
+                peers: peers.sorted(by: { a, b in
+                    a.remote < b.remote
+                })
             )
             if let json = try? JSONEncoder().encode(summary) {
-                completionHandler?(json)
-            }
-            
-        case "status":
-            let status = YggdrasilStatus(
-                enabled: true,
-                coords: self.yggdrasil.getCoordsString(),
-                peers: self.yggdrasil.getPeersJSON().data(using: .utf8) ?? Data(),
-                dht: self.yggdrasil.getDHTJSON().data(using: .utf8) ?? Data()
-            )
-            if let json = try? JSONEncoder().encode(status) {
                 completionHandler?(json)
             }
 

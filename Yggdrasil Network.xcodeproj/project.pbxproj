@@ -3,17 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		391B72A82A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B72A62A2FD90100896278 /* PacketTunnelProvider+FileDescriptor.swift */; };
 		3952ADB829945AF700B3835D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
-		3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
 		39B51A4A2997062E0059D29D /* PeersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B51A492997062E0059D29D /* PeersView.swift */; };
 		39B51A4B29994F240059D29D /* ConfigurationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB629945AF700B3835D /* ConfigurationProxy.swift */; };
 		39B51A4C29994F350059D29D /* CrossPlatformAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952ADB929945AFA00B3835D /* CrossPlatformAppDelegate.swift */; };
 		39B51A4D299951D60059D29D /* IPCResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* IPCResponses.swift */; };
+		39B9173C2BBD637200899F81 /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
+		39B9173D2BBD637200899F81 /* Yggdrasil.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		39BF9FC72A2F6FFD000E7269 /* Yggdrasil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996AF37270328080070947D /* Yggdrasil.xcframework */; };
 		39CC924D221DEDD3004960DC /* IPCResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CC924B221DEDCE004960DC /* IPCResponses.swift */; };
 		39F0205E2996CD760093F603 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0205D2996CD760093F603 /* Application.swift */; };
@@ -22,7 +23,7 @@
 		39F020662996CD770093F603 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F020652996CD770093F603 /* Preview Assets.xcassets */; };
 		39F0206B2996CF260093F603 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0206A2996CF260093F603 /* SettingsView.swift */; };
 		39F99B342A48F6E50045BD10 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AE88382319C93F0010FFF6 /* NetworkExtension.framework */; };
-		39F99B382A48F74F0045BD10 /* YggdrasilNetworkExtension.appex in CopyFiles */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39F99B382A48F74F0045BD10 /* YggdrasilNetworkExtension.appex in CopyFiles */ = {isa = PBXBuildFile; fileRef = E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E593CE9C1DF905AF00D7265D /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E593CE9B1DF905AF00D7265D /* PacketTunnelProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		39B9173E2BBD637200899F81 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				39B9173D2BBD637200899F81 /* Yggdrasil.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		39F99B372A48F7380045BD10 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3996AF39270328080070947D /* Yggdrasil.xcframework in Frameworks */,
+				39B9173C2BBD637200899F81 /* Yggdrasil.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +211,7 @@
 				E593CE931DF905AF00D7265D /* Sources */,
 				E593CE941DF905AF00D7265D /* Frameworks */,
 				E593CE951DF905AF00D7265D /* Resources */,
+				39B9173E2BBD637200899F81 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -309,10 +322,6 @@
 /* Begin PBXTargetDependency section */
 		39F99B362A48F70F0045BD10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilters = (
-				ios,
-				macos,
-			);
 			target = E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */;
 			targetProxy = 39F99B352A48F70F0045BD10 /* PBXContainerItemProxy */;
 		};
@@ -363,6 +372,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -413,6 +423,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -548,9 +559,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Yggdrasil Network Extension/YggdrasilNetworkExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 32;
-				DEVELOPMENT_TEAM = R9AV23TXF2;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = R9AV23TXF2;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = R9AV23TXF2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,8 +581,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.neilalexander.yggdrasil.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Provisioning eu.neilalexander.yggdrasil.extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Provisioning2 eu.neilalexander.yggdrasil.extension";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Yggdrasil Network Extension/YggdrasilNetworkExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,9 +599,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Yggdrasil Network Extension/YggdrasilNetworkExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 32;
-				DEVELOPMENT_TEAM = R9AV23TXF2;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = R9AV23TXF2;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = R9AV23TXF2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -599,8 +622,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8ce353d5-fd5f-4d5e-b664-8ad294091125";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Provisioning eu.neilalexander.yggdrasil.extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Provisioning2 eu.neilalexander.yggdrasil.extension";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Yggdrasil Network Extension/YggdrasilNetworkExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

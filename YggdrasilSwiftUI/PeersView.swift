@@ -8,22 +8,25 @@
 import SwiftUI
 
 struct PeersView: View {
-    // @Binding public var yggdrasilConfiguration: ConfigurationProxy
     @ObservedObject private var appDelegate = Application.appDelegate
+#if os(iOS)
+    @Environment(\.editMode) var editMode
+#endif
     
     var body: some View {
         Form {
             Section(content: {
                 ForEach(Array(appDelegate.yggdrasilConfig.peers.enumerated()), id: \.offset) { index, peer in
                     HStack() {
-                        Text(peer)
-                        //TextField("", text: $yggdrasilConfiguration.peers[index])
-                        //    .multilineTextAlignment(.leading)
+                        TextField("Peer", text: $appDelegate.yggdrasilConfig.peers[index])
+                            .labelsHidden()
+#if os(iOS)
+                            .disabled(!editMode!.wrappedValue.isEditing)
+#endif
 #if os(macOS)
                         Spacer()
                         Button(role: .destructive) {
-                            // appDelegate.yggdrasilConfig.peers.remove { $0 == peerURI }
-                            // self.delete(at: appDelegate.yggdrasilConfig.peers.firstIndex { $0 == peerURI })
+                            appDelegate.yggdrasilConfig.peers.remove(at: index)
                         } label: {
                             Image(systemName: "xmark.circle.fill")
                         }
@@ -38,13 +41,15 @@ struct PeersView: View {
                     appDelegate.yggdrasilConfig.peers.remove(atOffsets: indexSet)
                 }
                 
+#if os(macOS)
                 Button {
-                    appDelegate.yggdrasilConfig.peers.append("foo")
+                    appDelegate.yggdrasilConfig.peers.append("")
                 } label: {
                     Label("Add peer", systemImage: "plus")
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(.accentColor)
+#endif
                 
                 Text("Yggdrasil will automatically attempt to connect to configured peers when started. If you configure more than one peer, your device may carry traffic on behalf of other network nodes. Avoid this by configuring only a single peer. Data charges may apply when using mobile data.")
                     .font(.system(size: 11))
@@ -70,20 +75,27 @@ struct PeersView: View {
                             .foregroundColor(.gray)
                     }
                 }
+                TextField("Multicast password", text: $appDelegate.yggdrasilConfig.multicastPassword)
             }, header: {
                 Text("Local connectivity")
             })
         }
-#if os(iOS)
-        .toolbar {
-           // EditButton()
-        }
-#endif
         .formStyle(.grouped)
         .navigationTitle("Peers")
-        #if os(iOS)
+#if os(iOS)
+        .toolbar {
+            Button("Add", systemImage: "plus") {
+                appDelegate.yggdrasilConfig.peers.append("")
+            }
+            EditButton()
+                .onChange(of: editMode!.wrappedValue) { edit in
+                    if !edit.isEditing {
+                        try? appDelegate.yggdrasilConfig.save(to: &appDelegate.vpnManager)
+                    }
+                }
+        }
         .navigationBarTitleDisplayMode(.large)
-        #endif
+#endif
     }
 }
 

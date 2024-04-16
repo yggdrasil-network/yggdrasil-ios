@@ -22,11 +22,12 @@ typealias ApplicationDelegateAdaptor = NSApplicationDelegateAdaptor
 
 class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     var vpnManager: NETunnelProviderManager = NETunnelProviderManager()
-    var yggdrasilConfig: ConfigurationProxy = ConfigurationProxy()
+    var yggdrasilConfig: ConfigurationProxy
     let yggdrasilComponent = "eu.neilalexander.yggdrasil.extension"
     private var adminTimer: DispatchSourceTimer?
     
     override init() {
+        self.yggdrasilConfig = ConfigurationProxy(manager: self.vpnManager)
         super.init()
         
         NotificationCenter.default.addObserver(forName: .NEVPNStatusDidChange, object: nil, queue: nil, using: { notification in
@@ -34,7 +35,6 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
                 switch conn.status {
                 case .connected:
                     self.requestSummaryIPC()
-                    self.requestStatusIPC()
                 case .disconnecting, .disconnected:
                     self.clearStatus()
                 default:
@@ -73,9 +73,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     @Published var yggdrasilSubnet: String = "N/A"
     @Published var yggdrasilCoords: String = "[]"
 
-    @Published var yggdrasilPeers: [[String: Any]] = [[:]]
-    @Published var yggdrasilDHT: [[String: Any]] = [[:]]
-    @Published var yggdrasilNodeInfo: [String: Any] = [:]
+    @Published var yggdrasilPeers: [YggdrasilPeer] = []
     
     func yggdrasilVersion() -> String {
         return Yggdrasil.MobileGetVersion()
@@ -111,7 +109,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     
     func updateStatus(conn: NEVPNConnection) {
         if conn.status == .connected {
-            self.requestStatusIPC()
+            self.requestSummaryIPC()
         } else if conn.status == .disconnecting || conn.status == .disconnected {
             self.clearStatus()
         }
@@ -183,30 +181,14 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
         if let session = self.vpnManager.connection as? NETunnelProviderSession {
             try? session.sendProviderMessage("summary".data(using: .utf8)!) { js in
                 if let js = js, let summary = try? JSONDecoder().decode(YggdrasilSummary.self, from: js) {
-                    self.yggdrasilEnabled = true
+                    self.yggdrasilEnabled = summary.enabled
                     self.yggdrasilIP = summary.address
                     self.yggdrasilSubnet = summary.subnet
                     self.yggdrasilPublicKey = summary.publicKey
-                }
-            }
-        }
-    }
-    
-    func requestStatusIPC() {
-        if self.vpnManager.connection.status != .connected {
-            return
-        }
-        if let session = self.vpnManager.connection as? NETunnelProviderSession {
-            try? session.sendProviderMessage("status".data(using: .utf8)!) { js in
-                if let js = js, let status = try? JSONDecoder().decode(YggdrasilStatus.self, from: js) {
-                    self.yggdrasilCoords = status.coords
-                    if let jsonResponse = try? JSONSerialization.jsonObject(with: status.peers, options: []) as? [[String: Any]] {
-                        self.yggdrasilPeers = jsonResponse
-                    }
-                    if let jsonResponse = try? JSONSerialization.jsonObject(with: status.dht, options: []) as? [[String: Any]] {
-                        self.yggdrasilDHT = jsonResponse
-                    }
-                    self.yggdrasilConnected = self.yggdrasilEnabled && self.yggdrasilPeers.count > 0 && self.yggdrasilDHT.count > 0
+                    self.yggdrasilPeers = summary.peers
+                    self.yggdrasilConnected = summary.peers.count > 0
+                    
+                    print(self.yggdrasilPeers)
                 }
             }
         }
@@ -218,6 +200,5 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
         self.yggdrasilSubnet = "N/A"
         self.yggdrasilCoords = "[]"
         self.yggdrasilPeers = []
-        self.yggdrasilDHT = []
     }
 }

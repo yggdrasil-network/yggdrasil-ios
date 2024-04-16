@@ -23,7 +23,7 @@ struct Application: App {
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
-                ZStack {
+                VStack {
                     List(selection: $selection) {
                         NavigationLink(destination: StatusView()) {
                             HStack {

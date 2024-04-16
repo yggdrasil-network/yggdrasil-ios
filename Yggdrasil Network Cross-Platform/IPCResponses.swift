@@ -11,11 +11,29 @@ struct YggdrasilSummary: Codable {
     var address: String
     var subnet: String
     var publicKey: String
+    var enabled: Bool
+    var peers: [YggdrasilPeer]
+    
+    func list() -> [String] {
+        return peers.map { $0.remote }
+    }
 }
 
-struct YggdrasilStatus: Codable {
-    var enabled: Bool
-    var coords: String
-    var peers: Data
-    var dht: Data
+struct YggdrasilPeer: Codable, Identifiable {
+    var id: String { remote } // For Identifiable protocol
+    let remote: String
+    let up: Bool
+    let address: String
+    let key: String
+    let priority: UInt8
+    let cost: UInt16?
+    
+    enum CodingKeys: String, CodingKey {
+        case remote = "URI"
+        case up = "Up"
+        case address = "IP"
+        case key = "Key"
+        case priority = "Priority"
+        case cost = "Cost"
+    }
 }

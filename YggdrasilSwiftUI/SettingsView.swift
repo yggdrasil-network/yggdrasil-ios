@@ -16,7 +16,7 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section(content: {
-                TextField("Device Name", text: $deviceName)
+                TextField("Device Name", text: $appDelegate.yggdrasilConfig.deviceName)
             }, header: {
                 Text("Public Identity")
             })
