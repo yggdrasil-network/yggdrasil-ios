@@ -76,6 +76,7 @@ struct PeersView: View {
                     }
                 }
                 TextField("Multicast password", text: $appDelegate.yggdrasilConfig.multicastPassword)
+                    .labelStyle(.titleAndIcon)
             }, header: {
                 Text("Local connectivity")
             })

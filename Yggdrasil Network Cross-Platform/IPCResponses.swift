@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct YggdrasilSummary: Codable {
     var address: String
@@ -17,14 +18,18 @@ struct YggdrasilSummary: Codable {
     func list() -> [String] {
         return peers.map { $0.remote }
     }
+    
+    func listUp() -> [String] {
+        return peers.filter { $0.up }.map { $0.remote }
+    }
 }
 
 struct YggdrasilPeer: Codable, Identifiable {
     var id: String { remote } // For Identifiable protocol
     let remote: String
     let up: Bool
-    let address: String
-    let key: String
+    let address: String?
+    let key: String?
     let priority: UInt8
     let cost: UInt16?
     
@@ -35,5 +40,12 @@ struct YggdrasilPeer: Codable, Identifiable {
         case key = "Key"
         case priority = "Priority"
         case cost = "Cost"
+    }
+    
+    public func getStatusBadgeColor() -> SwiftUI.Color {
+        if self.up {
+            return .green
+        }
+        return .gray
     }
 }

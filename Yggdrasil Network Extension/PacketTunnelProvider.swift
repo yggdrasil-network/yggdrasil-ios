@@ -113,9 +113,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 subnet: self.yggdrasil.getSubnetString(),
                 publicKey: self.yggdrasil.getPublicKeyString(),
                 enabled: true,
-                peers: peers.sorted(by: { a, b in
-                    a.remote < b.remote
-                })
+                peers: peers
             )
             if let json = try? JSONEncoder().encode(summary) {
                 completionHandler?(json)

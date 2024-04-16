@@ -34,6 +34,7 @@ struct SettingsView: View {
                 Text("Automatically start when connected to")
             })
             
+            /*
             Section(content: {
                 VStack(alignment: .leading) {
                     Button("Import configuration") {
@@ -76,6 +77,7 @@ struct SettingsView: View {
             }, header: {
                 Text("Configuration")
             })
+             */
         }
         .formStyle(.grouped)
         .navigationTitle("Settings")

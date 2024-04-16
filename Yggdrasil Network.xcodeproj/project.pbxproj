@@ -73,6 +73,7 @@
 		39B51A492997062E0059D29D /* PeersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersView.swift; sourceTree = "<group>"; };
 		39BF9FC12A2E9E51000E7269 /* YggdrasilNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YggdrasilNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		39CC924B221DEDCE004960DC /* IPCResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCResponses.swift; sourceTree = "<group>"; };
+		39DB9BEC2BCF28FA009BF2A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F0205D2996CD760093F603 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		39F0205F2996CD760093F603 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		39F0205C2996CD760093F603 /* YggdrasilSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				39DB9BEC2BCF28FA009BF2A4 /* Info.plist */,
 				39F0205D2996CD760093F603 /* Application.swift */,
 				39F0205F2996CD760093F603 /* StatusView.swift */,
 				39F0206A2996CF260093F603 /* SettingsView.swift */,
@@ -348,7 +350,9 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YggdrasilSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Yggdrasil;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -400,7 +404,9 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YggdrasilSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Yggdrasil;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

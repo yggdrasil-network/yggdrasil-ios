@@ -112,6 +112,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
             self.requestSummaryIPC()
         } else if conn.status == .disconnecting || conn.status == .disconnected {
             self.clearStatus()
+            self.yggdrasilEnabled = false
         }
     }
     
@@ -127,7 +128,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
             
             guard let savedManagers else {
                 print("Expected to find saved managers but didn't")
-                self.yggdrasilSupported = false
+                // self.yggdrasilSupported = false
                 return
             }
             
@@ -186,9 +187,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
                     self.yggdrasilSubnet = summary.subnet
                     self.yggdrasilPublicKey = summary.publicKey
                     self.yggdrasilPeers = summary.peers
-                    self.yggdrasilConnected = summary.peers.count > 0
-                    
-                    print(self.yggdrasilPeers)
+                    self.yggdrasilConnected = summary.peers.filter { $0.up }.count > 0
                 }
             }
         }

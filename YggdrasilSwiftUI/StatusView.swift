@@ -22,13 +22,12 @@ struct StatusView: View {
     private func getStatusBadgeColor() -> SwiftUI.Color {
         if !appDelegate.yggdrasilSupported {
             return .gray
-        } else if !appDelegate.yggdrasilEnabled {
-            return .gray
-        } else if !appDelegate.yggdrasilConnected {
-            return .yellow
-        } else {
+        } else if appDelegate.yggdrasilConnected {
             return .green
+        } else if appDelegate.yggdrasilEnabled {
+            return .yellow
         }
+        return .gray
     }
     
     private func getStatusBadgeText() -> String {
@@ -39,7 +38,7 @@ struct StatusView: View {
         } else if !appDelegate.yggdrasilConnected {
             return "No peers connected"
         } else {
-            return "Connected to \(appDelegate.yggdrasilPeers.count) peer(s)"
+            return "Connected to \(appDelegate.yggdrasilPeers.filter { $0.up }.count) peer(s)"
         }
     }
     
@@ -49,6 +48,7 @@ struct StatusView: View {
                 VStack(alignment: .leading) {
                     Toggle("Enable Yggdrasil", isOn: $appDelegate.yggdrasilEnabled)
                         .disabled(!appDelegate.yggdrasilSupported)
+                        .padding(.bottom, 2)
                     HStack {
                         Image(systemName: "circlebadge.fill")
                             .foregroundColor(statusBadgeColor)
@@ -116,15 +116,6 @@ struct StatusView: View {
                         .lineLimit(1)
                         .textSelection(.enabled)
                 }
-                /*HStack {
-                    Text("Coordinates")
-                    Spacer()
-                    Text(appDelegate.yggdrasilCoords)
-                        .foregroundColor(Color.gray)
-                        .truncationMode(.tail)
-                        .lineLimit(1)
-                        .textSelection(.enabled)
-                }*/
                 HStack {
                     Text("Public Key")
                     Spacer()
@@ -139,10 +130,20 @@ struct StatusView: View {
                 Text("Details")
             })
             
-            if self.appDelegate.yggdrasilEnabled {
-                Section(content: {
+            Section(content: {
+                if self.appDelegate.yggdrasilPeers.count == 0 {
+                    Text("No peers are connected")
+                        .foregroundStyle(.tertiary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                } else {
                     List(self.appDelegate.yggdrasilPeers.sorted(by: { a, b in
-                        a.key < a.key
+                        if a.up && !b.up {
+                            return true
+                        }
+                        if !a.up && b.up {
+                            return false
+                        }
+                        return a.remote < b.remote
                     }), id: \.remote) { peer in
                         VStack {
                             Text(peer.remote)
@@ -150,20 +151,30 @@ struct StatusView: View {
                                 .truncationMode(.tail)
                                 .lineLimit(1)
                                 .textSelection(.enabled)
-                            Text(peer.address)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 11, design: .monospaced))
-                                .truncationMode(.tail)
-                                .lineLimit(1)
-                                .textSelection(.enabled)
+                                .padding(.bottom, 2)
+                            HStack {
+                                Image(systemName: "circlebadge.fill")
+                                    .foregroundColor(peer.getStatusBadgeColor())
+                                    .onChange(of: peer.up) { newValue in
+                                        statusBadgeColor = peer.getStatusBadgeColor()
+                                    }
+                                Text(peer.up ? peer.address ?? "Unknown IP address" : "Not connected")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                    .font(.system(size: 11))
+                                    .truncationMode(.tail)
+                                    .lineLimit(1)
+                                    .textSelection(.enabled)
+                            }
                         }
                         .padding(.all, 2)
+                        .padding(.top, 4)
+                        .padding(.bottom, 4)
                     }
-                }, header: {
-                    Text("Peers")
-                })
-            }
+                }
+            }, header: {
+                Text("Peers")
+            })
         }
         .formStyle(.grouped)
         .navigationTitle("Yggdrasil")
