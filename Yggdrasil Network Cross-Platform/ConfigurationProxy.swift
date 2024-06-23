@@ -32,9 +32,14 @@ class PlatformItemSource: NSObject {}
 
 class ConfigurationProxy: PlatformItemSource {
     private var manager: NETunnelProviderManager?
-    private var json: Data? = nil
+    private var json: Data? = nil {
+        didSet {
+            summary = MobileSummaryFromConfig(json)
+        }
+    }
     private var dict: [String: Any]? = [:]
     private var timer: Timer?
+    public var summary: MobileParsedConfig?
     
     init(manager: NETunnelProviderManager) {
         self.manager = manager
@@ -46,11 +51,11 @@ class ConfigurationProxy: PlatformItemSource {
         } catch {
             NSLog("ConfigurationProxy: Error deserialising JSON (\(error))")
         }
-        #if os(iOS)
+#if os(iOS)
         self.set("name", inSection: "NodeInfo", to: UIDevice.current.name)
-        #elseif os(OSX)
+#elseif os(OSX)
         self.set("name", inSection: "NodeInfo", to: Host.current().localizedName ?? "")
-        #endif
+#endif
         self.fix()
     }
     
@@ -131,16 +136,16 @@ class ConfigurationProxy: PlatformItemSource {
             self.saveSoon()
         }
     }
-                                    
-   public var autoStartAny: Bool {
-       get {
-           return self.get("Any", inSection: "AutoStart") as? Bool ?? false
-       }
-       set {
-           self.set("Any", inSection: "AutoStart", to: newValue)
-           self.saveSoon()
-       }
-   }
+    
+    public var autoStartAny: Bool {
+        get {
+            return self.get("Any", inSection: "AutoStart") as? Bool ?? false
+        }
+        set {
+            self.set("Any", inSection: "AutoStart", to: newValue)
+            self.saveSoon()
+        }
+    }
     
     public var autoStartWiFi: Bool {
         get {
@@ -303,29 +308,29 @@ class ConfigurationProxy: PlatformItemSource {
                 wifirule.interfaceTypeMatch = .any
                 rules.insert(wifirule, at: 0)
             }
-            #if os(macOS)
+#if os(macOS)
             if self.get("Ethernet", inSection: "AutoStart") as? Bool ?? false {
                 let wifirule = NEOnDemandRuleConnect()
                 wifirule.interfaceTypeMatch = .ethernet
                 rules.insert(wifirule, at: 0)
             }
-            #endif
+#endif
             if self.get("WiFi", inSection: "AutoStart") as? Bool ?? false {
                 let wifirule = NEOnDemandRuleConnect()
                 wifirule.interfaceTypeMatch = .wiFi
                 rules.insert(wifirule, at: 0)
             }
-            #if canImport(UIKit)
+#if canImport(UIKit)
             if self.get("Mobile", inSection: "AutoStart") as? Bool ?? false {
                 let mobilerule = NEOnDemandRuleConnect()
                 mobilerule.interfaceTypeMatch = .cellular
                 rules.insert(mobilerule, at: 0)
             }
-            #endif
+#endif
             manager.onDemandRules = rules
             manager.isOnDemandEnabled = rules.count > 1
             providerProtocol.disconnectOnSleep = rules.count > 1
-
+            
             manager.protocolConfiguration = providerProtocol
             
             manager.saveToPreferences(completionHandler: { error in
@@ -345,8 +350,8 @@ class ConfigurationProxy: PlatformItemSource {
     private func convertToJson() throws {
         self.json = try JSONSerialization.data(withJSONObject: self.dict as Any, options: .prettyPrinted)
     }
-
-    #if canImport(UIKit)
+    
+#if canImport(UIKit)
     override func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return "yggdrasil.conf"
     }
@@ -361,5 +366,5 @@ class ConfigurationProxy: PlatformItemSource {
         }
         return "yggdrasil.conf.json"
     }
-    #endif
+#endif
 }

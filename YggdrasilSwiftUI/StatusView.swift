@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 #if os(iOS)
 typealias MyListStyle = DefaultListStyle
@@ -18,16 +19,19 @@ struct StatusView: View {
     
     @State private var statusBadgeColor: SwiftUI.Color = .gray
     @State private var statusBadgeText: String = "Not enabled"
+    @State private var showingPublicKeyPopover = false
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     
     private func getStatusBadgeColor() -> SwiftUI.Color {
-        if !appDelegate.yggdrasilSupported {
-            return .gray
-        } else if appDelegate.yggdrasilConnected {
+        if appDelegate.yggdrasilConnected {
             return .green
         } else if appDelegate.yggdrasilEnabled {
             return .yellow
+        } else {
+            return .gray
         }
-        return .gray
     }
     
     private func getStatusBadgeText() -> String {
@@ -41,6 +45,40 @@ struct StatusView: View {
             return "Connected to \(appDelegate.yggdrasilPeers.filter { $0.up }.count) peer(s)"
         }
     }
+    
+    func formatBytes(bytes: Double) -> String {
+        guard bytes > 0 else {
+            return "N/A"
+        }
+        
+        // Adapted from http://stackoverflow.com/a/18650828
+        let suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        let k: Double = 1024
+        let i = floor(log(bytes) / log(k))
+        
+        // Format number with thousands separator and everything below 1 GB with no decimal places.
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = i < 3 ? 0 : 1
+        numberFormatter.numberStyle = .decimal
+        
+        let numberString = numberFormatter.string(from: NSNumber(value: bytes / pow(k, i))) ?? "Unknown"
+        let suffix = suffixes[Int(i)]
+        return "\(numberString) \(suffix)"
+    }
+    
+#if os(iOS)
+    func generateQRCode(from string: String) -> UIImage {
+        filter.message = Data(string.utf8)
+        
+        if let outputImage = filter.outputImage {
+            if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgImage)
+            }
+        }
+        
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
+    }
+#endif
     
     var body: some View {
         Form {
@@ -125,6 +163,25 @@ struct StatusView: View {
                         .truncationMode(.tail)
                         .lineLimit(1)
                         .textSelection(.enabled)
+#if os(iOS)
+                    if appDelegate.yggdrasilPublicKey != "N/A" {
+                        Button("QR Code", systemImage: "qrcode", action: {
+                            showingPublicKeyPopover = true
+                        })
+                        .labelStyle(.iconOnly)
+                        .popover(isPresented: $showingPublicKeyPopover) {
+                            Text("Public Key")
+                                .font(.headline)
+                                .padding()
+                            Image(uiImage: generateQRCode(from: "\(appDelegate.yggdrasilPublicKey)"))
+                                .interpolation(.none)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                                .padding()
+                        }
+                    }
+#endif
                 }
             }, header: {
                 Text("Details")
@@ -146,25 +203,48 @@ struct StatusView: View {
                         return a.remote < b.remote
                     }), id: \.remote) { peer in
                         VStack {
-                            Text(peer.remote)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .truncationMode(.tail)
-                                .lineLimit(1)
-                                .textSelection(.enabled)
-                                .padding(.bottom, 2)
+                            HStack {
+                                Text(peer.remote)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .truncationMode(.tail)
+                                    .lineLimit(1)
+                                    .textSelection(.enabled)
+                                    .padding(.bottom, 2)
+                            }
                             HStack {
                                 Image(systemName: "circlebadge.fill")
                                     .foregroundColor(peer.getStatusBadgeColor())
                                     .onChange(of: peer.up) { newValue in
                                         statusBadgeColor = peer.getStatusBadgeColor()
                                     }
-                                Text(peer.up ? peer.address ?? "Unknown IP address" : "Not connected")
+                                Text(peer.up ? "Connected" : "Not connected")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(Color.gray)
                                     .font(.system(size: 11))
                                     .truncationMode(.tail)
                                     .lineLimit(1)
                                     .textSelection(.enabled)
+                                if peer.up {
+                                    Spacer()
+                                    if let uptime = peer.uptime {
+                                        Label(Duration(secondsComponent: uptime/1000000000, attosecondsComponent: 0).formatted(), systemImage: "clock")
+                                            .font(.system(size: 11))
+                                            .labelStyle(.titleAndIcon)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    if let rxBytes = peer.rxBytes {
+                                        Label(formatBytes(bytes: rxBytes), systemImage: "arrowshape.down")
+                                            .font(.system(size: 11))
+                                            .labelStyle(.titleAndIcon)
+                                            .foregroundStyle(.teal)
+                                    }
+                                    if let txBytes = peer.txBytes {
+                                        Label(formatBytes(bytes: txBytes), systemImage: "arrowshape.up")
+                                            .font(.system(size: 11))
+                                            .labelStyle(.titleAndIcon)
+                                            .foregroundStyle(.purple)
+                                    }
+                                }
                             }
                         }
                         .padding(.all, 2)
@@ -178,9 +258,9 @@ struct StatusView: View {
         }
         .formStyle(.grouped)
         .navigationTitle("Yggdrasil")
-        #if os(iOS)
+#if os(iOS)
         .navigationBarTitleDisplayMode(.large)
-        #endif
+#endif
     }
 }
 

@@ -72,7 +72,7 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     @Published var yggdrasilIP: String = "N/A"
     @Published var yggdrasilSubnet: String = "N/A"
     @Published var yggdrasilCoords: String = "[]"
-
+    
     @Published var yggdrasilPeers: [YggdrasilPeer] = []
     
     func yggdrasilVersion() -> String {
@@ -108,11 +108,12 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
     func becameBackground() {}
     
     func updateStatus(conn: NEVPNConnection) {
-        if conn.status == .connected {
+        if conn.status == .connected || conn.status == .connecting {
+            self.yggdrasilEnabled = true
             self.requestSummaryIPC()
         } else if conn.status == .disconnecting || conn.status == .disconnected {
-            self.clearStatus()
             self.yggdrasilEnabled = false
+            self.clearStatus()
         }
     }
     
@@ -188,6 +189,8 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
                     self.yggdrasilPublicKey = summary.publicKey
                     self.yggdrasilPeers = summary.peers
                     self.yggdrasilConnected = summary.peers.filter { $0.up }.count > 0
+                    
+                    print("Response: \(String(data: js, encoding: .utf8))")
                 }
             }
         }

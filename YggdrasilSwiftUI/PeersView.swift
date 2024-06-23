@@ -18,7 +18,7 @@ struct PeersView: View {
             Section(content: {
                 ForEach(Array(appDelegate.yggdrasilConfig.peers.enumerated()), id: \.offset) { index, peer in
                     HStack() {
-                        TextField("Peer", text: $appDelegate.yggdrasilConfig.peers[index])
+                        TextField("tls://host:port", text: $appDelegate.yggdrasilConfig.peers[index])
                             .labelsHidden()
 #if os(iOS)
                             .disabled(!editMode!.wrappedValue.isEditing)
@@ -75,8 +75,18 @@ struct PeersView: View {
                             .foregroundColor(.gray)
                     }
                 }
-                TextField("Multicast password", text: $appDelegate.yggdrasilConfig.multicastPassword)
-                    .labelStyle(.titleAndIcon)
+                VStack {
+                    HStack {
+                        Text("Multicast password")
+                        TextField("None", text: $appDelegate.yggdrasilConfig.multicastPassword)
+                            .labelsHidden()
+                            .multilineTextAlignment(.trailing)
+                    }
+                    Text("If provided, this device will only automatically peer with other nodes that share the same password.")
+                        .font(.system(size: 11))
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }, header: {
                 Text("Local connectivity")
             })
@@ -85,8 +95,10 @@ struct PeersView: View {
         .navigationTitle("Peers")
 #if os(iOS)
         .toolbar {
-            Button("Add", systemImage: "plus") {
-                appDelegate.yggdrasilConfig.peers.append("")
+            if editMode!.wrappedValue.isEditing {
+                Button("Add", systemImage: "plus") {
+                    appDelegate.yggdrasilConfig.peers.append("")
+                }
             }
             EditButton()
                 .onChange(of: editMode!.wrappedValue) { edit in

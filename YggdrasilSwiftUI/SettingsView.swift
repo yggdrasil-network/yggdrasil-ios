@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    //@Binding public var yggdrasilConfiguration: ConfigurationProxy
     @ObservedObject private var appDelegate = Application.appDelegate
     
     @State private var deviceName = ""
@@ -35,55 +34,55 @@ struct SettingsView: View {
             })
             
             /*
-            Section(content: {
-                VStack(alignment: .leading) {
-                    Button("Import configuration") {
-                        
-                    }
-                    #if os(macOS)
-                    .buttonStyle(.link)
-                    #endif
-                    .foregroundColor(.accentColor)
-                    Text("Import configuration from another device, including the public key and Yggdrasil IP address.")
-                        .font(.system(size: 11))
-                        .foregroundColor(.gray)
-                }
-                
-                VStack(alignment: .leading) {
-                    Button("Export configuration") {
-                        
-                    }
-                    #if os(macOS)
-                    .buttonStyle(.link)
-                    #endif
-                    .foregroundColor(.accentColor)
-                    Text("Configuration will be exported as a file. Your configuration contains your private key which is extremely sensitive. Do not share it with anyone.")
-                        .font(.system(size: 11))
-                        .foregroundColor(.gray)
-                }
-                
-                VStack(alignment: .leading) {
-                    Button("Reset configuration") {
-                        
-                    }
-                    #if os(macOS)
-                    .buttonStyle(.link)
-                    #endif
-                    .foregroundColor(.red)
-                    Text("Resetting will overwrite with newly generated configuration. Your public key and Yggdrasil IP address will change.")
-                        .font(.system(size: 11))
-                        .foregroundColor(.gray)
-                }
-            }, header: {
-                Text("Configuration")
-            })
+             Section(content: {
+             VStack(alignment: .leading) {
+             Button("Import configuration") {
+             
+             }
+             #if os(macOS)
+             .buttonStyle(.link)
+             #endif
+             .foregroundColor(.accentColor)
+             Text("Import configuration from another device, including the public key and Yggdrasil IP address.")
+             .font(.system(size: 11))
+             .foregroundColor(.gray)
+             }
+             
+             VStack(alignment: .leading) {
+             Button("Export configuration") {
+             
+             }
+             #if os(macOS)
+             .buttonStyle(.link)
+             #endif
+             .foregroundColor(.accentColor)
+             Text("Configuration will be exported as a file. Your configuration contains your private key which is extremely sensitive. Do not share it with anyone.")
+             .font(.system(size: 11))
+             .foregroundColor(.gray)
+             }
+             
+             VStack(alignment: .leading) {
+             Button("Reset configuration") {
+             
+             }
+             #if os(macOS)
+             .buttonStyle(.link)
+             #endif
+             .foregroundColor(.red)
+             Text("Resetting will overwrite with newly generated configuration. Your public key and Yggdrasil IP address will change.")
+             .font(.system(size: 11))
+             .foregroundColor(.gray)
+             }
+             }, header: {
+             Text("Configuration")
+             })
              */
         }
         .formStyle(.grouped)
         .navigationTitle("Settings")
-        #if os(iOS)
+#if os(iOS)
         .navigationBarTitleDisplayMode(.large)
-        #endif
+#endif
     }
 }
 

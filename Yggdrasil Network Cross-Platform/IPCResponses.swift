@@ -32,6 +32,9 @@ struct YggdrasilPeer: Codable, Identifiable {
     let key: String?
     let priority: UInt8
     let cost: UInt16?
+    let rxBytes: Double?
+    let txBytes: Double?
+    let uptime: Int64?
     
     enum CodingKeys: String, CodingKey {
         case remote = "URI"
@@ -40,6 +43,9 @@ struct YggdrasilPeer: Codable, Identifiable {
         case key = "Key"
         case priority = "Priority"
         case cost = "Cost"
+        case rxBytes = "RXBytes"
+        case txBytes = "TXBytes"
+        case uptime = "Uptime"
     }
     
     public func getStatusBadgeColor() -> SwiftUI.Color {

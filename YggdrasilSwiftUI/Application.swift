@@ -12,11 +12,11 @@ import NetworkExtension
 struct Application: App {
     @State private var selection: String? = "Status"
     
-    #if os(iOS)
+#if os(iOS)
     @UIApplicationDelegateAdaptor(CrossPlatformAppDelegate.self) static var appDelegate: CrossPlatformAppDelegate
-    #elseif os(macOS)
+#elseif os(macOS)
     @NSApplicationDelegateAdaptor(CrossPlatformAppDelegate.self) static var appDelegate: CrossPlatformAppDelegate
-    #endif
+#endif
     
     @Environment(\.scenePhase) var scenePhase
     
@@ -53,14 +53,14 @@ struct Application: App {
                     //.listStyle(.sidebar)
                     //.navigationSplitViewColumnWidth(200)
                     
-                    Image("YggdrasilLogo")
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.primary)
-                        .opacity(0.1)
-                        .frame(maxWidth: 200, alignment: .bottom)
-                        .padding(.all, 24)
+                    /*Image("YggdrasilLogo")
+                     .renderingMode(.template)
+                     .resizable()
+                     .aspectRatio(contentMode: .fit)
+                     .foregroundColor(.primary)
+                     .opacity(0.05)
+                     .frame(maxWidth: 200, alignment: .bottom)
+                     .padding(.all, 24)*/
                 }
                 .navigationSplitViewColumnWidth(200)
                 .listStyle(.sidebar)
@@ -82,8 +82,8 @@ struct Application: App {
                 }
             }
         }
-        #if os(macOS)
+#if os(macOS)
         .windowStyle(.hiddenTitleBar)
-        #endif
+#endif
     }
 }

@@ -3,13 +3,13 @@ import Foundation
 import Yggdrasil
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
-
+    
     var yggdrasil: MobileYggdrasil = MobileYggdrasil()
     var yggdrasilConfig: ConfigurationProxy?
-
+    
     func startYggdrasil() -> Error? {
         var err: Error? = nil
-
+        
         self.setTunnelNetworkSettings(nil) { (error: Error?) -> Void in
             NSLog("Starting Yggdrasil")
             
@@ -30,7 +30,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     NSLog("Starting Yggdrasil process produced an error: " + error.localizedDescription)
                     return
                 }
-
+                
                 let address = self.yggdrasil.getAddressString()
                 let subnet = self.yggdrasil.getSubnetString()
                 
@@ -41,7 +41,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 tunnelNetworkSettings.ipv6Settings = NEIPv6Settings(addresses: [address], networkPrefixLengths: [7])
                 tunnelNetworkSettings.ipv6Settings?.includedRoutes = [NEIPv6Route(destinationAddress: "0200::", networkPrefixLength: 7)]
                 tunnelNetworkSettings.mtu = NSNumber(integerLiteral: self.yggdrasil.getMTU())
-
+                
                 NSLog("Setting tunnel network settings...")
                 
                 self.setTunnelNetworkSettings(tunnelNetworkSettings) { (error: Error?) -> Void in
@@ -67,7 +67,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         return err
     }
-
+    
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         if let conf = (self.protocolConfiguration as! NETunnelProviderProtocol).providerConfiguration {
             if let json = conf["json"] as? Data {
@@ -88,7 +88,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
         }
     }
-
+    
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         try? self.yggdrasil.stop()
         super.stopTunnel(with: reason, completionHandler: completionHandler)
@@ -99,6 +99,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         switch request {
         case "summary":
             let pj = self.yggdrasil.getPeersJSON()
+            NSLog("JSON: \(pj)")
             var peers: [YggdrasilPeer] = []
             do {
                 peers = try JSONDecoder().decode(
@@ -118,7 +119,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             if let json = try? JSONEncoder().encode(summary) {
                 completionHandler?(json)
             }
-
+            
         default:
             completionHandler?(nil)
         }
