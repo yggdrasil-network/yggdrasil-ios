@@ -98,19 +98,17 @@ struct PeersView: View {
         .navigationTitle("Peers")
 #if os(iOS)
         .toolbar {
-            if editMode!.wrappedValue.isEditing {
-                Button("Add", systemImage: "plus") {
-                    //appDelegate.yggdrasilConfig.peers.append("")
-                    addPeerURI = ""
-                    isAddingPeer.toggle()
-                }.alert("Add new peer", isPresented: $isAddingPeer) {
-                    TextField("tls://host:port", text: $addPeerURI)
-                        .textInputAutocapitalization(.never)
-                    Button("Add", action: addPeer)
-                    Button("Cancel", role: .cancel) { }
-                } message: {
-                    Text("Specify the peer URI to add.")
-                }
+            Button("Add", systemImage: "plus") {
+                //appDelegate.yggdrasilConfig.peers.append("")
+                addPeerURI = ""
+                isAddingPeer.toggle()
+            }.alert("Add new peer", isPresented: $isAddingPeer) {
+                TextField("tls://host:port", text: $addPeerURI)
+                    .textInputAutocapitalization(.never)
+                Button("Add", action: addPeer)
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Specify the peer URI to add.")
             }
             EditButton()
                 .onChange(of: editMode!.wrappedValue) { edit in
