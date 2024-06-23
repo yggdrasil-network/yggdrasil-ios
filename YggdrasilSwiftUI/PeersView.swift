@@ -13,6 +13,9 @@ struct PeersView: View {
     @Environment(\.editMode) var editMode
 #endif
     
+    @State private var isAddingPeer = false
+    @State private var addPeerURI = ""
+    
     var body: some View {
         Form {
             Section(content: {
@@ -97,7 +100,16 @@ struct PeersView: View {
         .toolbar {
             if editMode!.wrappedValue.isEditing {
                 Button("Add", systemImage: "plus") {
-                    appDelegate.yggdrasilConfig.peers.append("")
+                    //appDelegate.yggdrasilConfig.peers.append("")
+                    addPeerURI = ""
+                    isAddingPeer.toggle()
+                }.alert("Add new peer", isPresented: $isAddingPeer) {
+                    TextField("tls://host:port", text: $addPeerURI)
+                        .textInputAutocapitalization(.never)
+                    Button("Add", action: addPeer)
+                    Button("Cancel", role: .cancel) { }
+                } message: {
+                    Text("Specify the peer URI to add.")
                 }
             }
             EditButton()
@@ -109,6 +121,13 @@ struct PeersView: View {
         }
         .navigationBarTitleDisplayMode(.large)
 #endif
+    }
+    
+    func addPeer() {
+        if addPeerURI != "" {
+            appDelegate.yggdrasilConfig.peers.append(addPeerURI)
+        }
+        addPeerURI = ""
     }
 }
 

@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "39F0205A2996CD760093F603"
-               BuildableName = "YggdrasilSwiftUI.app"
-               BlueprintName = "YggdrasilSwiftUI"
+               BuildableName = "Yggdrasil.app"
+               BlueprintName = "Yggdrasil"
                ReferencedContainer = "container:Yggdrasil Network.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "39F0205A2996CD760093F603"
-            BuildableName = "YggdrasilSwiftUI.app"
-            BlueprintName = "YggdrasilSwiftUI"
+            BuildableName = "Yggdrasil.app"
+            BlueprintName = "Yggdrasil"
             ReferencedContainer = "container:Yggdrasil Network.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "39F0205A2996CD760093F603"
-            BuildableName = "YggdrasilSwiftUI.app"
-            BlueprintName = "YggdrasilSwiftUI"
+            BuildableName = "Yggdrasil.app"
+            BlueprintName = "Yggdrasil"
             ReferencedContainer = "container:Yggdrasil Network.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

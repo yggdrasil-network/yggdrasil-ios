@@ -15,6 +15,7 @@ import Yggdrasil
 import NetworkExtension
 import Foundation
 import CoreData
+import Combine
 
 #if os(iOS)
 class PlatformItemSource: NSObject, UIActivityItemSource {
@@ -34,12 +35,12 @@ class ConfigurationProxy: PlatformItemSource {
     private var manager: NETunnelProviderManager?
     private var json: Data? = nil {
         didSet {
-            summary = MobileSummaryFromConfig(json)
+            //summary = MobileSummaryFromConfig(json)
         }
     }
     private var dict: [String: Any]? = [:]
     private var timer: Timer?
-    public var summary: MobileParsedConfig?
+    //public var summary: MobileParsedConfig?
     
     init(manager: NETunnelProviderManager) {
         self.manager = manager
