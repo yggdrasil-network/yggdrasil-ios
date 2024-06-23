@@ -11,6 +11,7 @@ struct SettingsView: View {
     @ObservedObject private var appDelegate = Application.appDelegate
     
     @State private var deviceName = ""
+    @State private var isResetting = false
     
     var body: some View {
         Form {
@@ -33,56 +34,40 @@ struct SettingsView: View {
                 Text("Automatically start when connected to")
             })
             
-            /*
+            
              Section(content: {
-             VStack(alignment: .leading) {
-             Button("Import configuration") {
-             
-             }
-             #if os(macOS)
-             .buttonStyle(.link)
-             #endif
-             .foregroundColor(.accentColor)
-             Text("Import configuration from another device, including the public key and Yggdrasil IP address.")
-             .font(.system(size: 11))
-             .foregroundColor(.gray)
-             }
-             
-             VStack(alignment: .leading) {
-             Button("Export configuration") {
-             
-             }
-             #if os(macOS)
-             .buttonStyle(.link)
-             #endif
-             .foregroundColor(.accentColor)
-             Text("Configuration will be exported as a file. Your configuration contains your private key which is extremely sensitive. Do not share it with anyone.")
-             .font(.system(size: 11))
-             .foregroundColor(.gray)
-             }
-             
-             VStack(alignment: .leading) {
-             Button("Reset configuration") {
-             
-             }
-             #if os(macOS)
-             .buttonStyle(.link)
-             #endif
-             .foregroundColor(.red)
-             Text("Resetting will overwrite with newly generated configuration. Your public key and Yggdrasil IP address will change.")
-             .font(.system(size: 11))
-             .foregroundColor(.gray)
-             }
-             }, header: {
-             Text("Configuration")
-             })
-             */
+                 VStack(alignment: .leading) {
+                     Button("Reset configuration") {
+                         self.isResetting.toggle()
+                     }
+                     .alert("Reset configuration", isPresented: $isResetting) {
+                         Button("Confirm", action: resetConfig)
+                         Button("Cancel", role: .cancel) { }
+                     } message: {
+                         Text("Are you sure you want to reset your configuration? This operation cannot be undone.")
+                     }
+                     #if os(macOS)
+                     .buttonStyle(.link)
+                     #endif
+                     .foregroundColor(.red)
+                     Text("Resetting will overwrite with newly generated configuration. Your public key and Yggdrasil IP address will change.")
+                     .font(.system(size: 11))
+                     .foregroundColor(.gray)
+                     }
+                 }, header: {
+                     Text("Configuration")
+                 }
+             )
         }
         .formStyle(.grouped)
         .navigationTitle("Settings")
 #if os(iOS)
         .navigationBarTitleDisplayMode(.large)
 #endif
+    }
+    
+    func resetConfig() {
+        self.appDelegate.yggdrasilConfig.reset()
     }
 }
 

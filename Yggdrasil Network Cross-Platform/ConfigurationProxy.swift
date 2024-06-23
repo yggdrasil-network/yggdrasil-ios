@@ -90,6 +90,15 @@ class ConfigurationProxy: PlatformItemSource {
         }
     }
     
+    public func reset() {
+        self.json = MobileGenerateConfigJSON()
+        try? self.convertToDict()
+        self.fix()
+        if var manager = self.manager {
+            try? self.save(to: &manager)
+        }
+    }
+    
     public var multicastBeacons: Bool {
         get {
             let multicastInterfaces = self.get("MulticastInterfaces") as? [[String: Any]] ?? []
