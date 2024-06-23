@@ -13,11 +13,9 @@ class TableViewController: UITableViewController {
     
     @IBOutlet weak var statsSelfIPCell: UITableViewCell!
     @IBOutlet weak var statsSelfSubnetCell: UITableViewCell!
-    @IBOutlet weak var statsSelfCoordsCell: UITableViewCell!
     
     @IBOutlet var statsSelfIP: UILabel!
     @IBOutlet var statsSelfSubnet: UILabel!
-    @IBOutlet var statsSelfCoords: UILabel!
     @IBOutlet var statsSelfPeers: UILabel!
     
     @IBOutlet var statsVersion: UILabel!
@@ -25,7 +23,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {      
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilSelfUpdated), name: NSNotification.Name.YggdrasilSelfUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilPeersUpdated), name: NSNotification.Name.YggdrasilPeersUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilDHTUpdated), name: NSNotification.Name.YggdrasilDHTUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onYggdrasilSettingsUpdated), name: NSNotification.Name.YggdrasilSettingsUpdated, object: nil)
     }
     
@@ -76,7 +73,7 @@ class TableViewController: UITableViewController {
     
     func updateConnectedStatus() {
         if self.app.vpnManager.connection.status == .connected {
-            if app.yggdrasilDHT.count > 0 {
+            if app.yggdrasilPeers.count > 0 {
                 connectedStatusLabel.text = "Enabled"
                 connectedStatusLabel.textColor = UIColor(red: 0.37, green: 0.79, blue: 0.35, alpha: 1.0)
             } else {
@@ -96,11 +93,9 @@ class TableViewController: UITableViewController {
     @objc func onYggdrasilSelfUpdated(notification: NSNotification) {
         statsSelfIP.text = app.yggdrasilSelfIP
         statsSelfSubnet.text = app.yggdrasilSelfSubnet
-        statsSelfCoords.text = app.yggdrasilSelfCoords
         
         statsSelfIPCell.layoutSubviews()
         statsSelfSubnetCell.layoutSubviews()
-        statsSelfCoordsCell.layoutSubviews()
         
         let status = self.app.vpnManager.connection.status
         toggleConnect.isOn = status == .connecting || status == .connected
@@ -113,7 +108,7 @@ class TableViewController: UITableViewController {
     }
     
     @objc func onYggdrasilPeersUpdated(notification: NSNotification) {
-        let peercount = app.yggdrasilPeers.count
+        let peercount = app.yggdrasilPeers.filter { $0["Up"] as? Bool ?? false }.count
         if peercount <= 0 {
             statsSelfPeers.text = "No peers"
         } else if peercount == 1 {

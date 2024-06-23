@@ -98,12 +98,12 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler?(self.yggdrasil.getAddressString().data(using: .utf8))
         case "subnet":
             completionHandler?(self.yggdrasil.getSubnetString().data(using: .utf8))
-        case "coords":
-            completionHandler?(self.yggdrasil.getCoordsString().data(using: .utf8))
+        //case "coords":
+        //    completionHandler?(self.yggdrasil.getCoordsString().data(using: .utf8))
         case "peers":
             completionHandler?(self.yggdrasil.getPeersJSON().data(using: .utf8))
-        case "dht":
-            completionHandler?(self.yggdrasil.getDHTJSON().data(using: .utf8))
+        //case "dht":
+        //    completionHandler?(self.yggdrasil.getDHTJSON().data(using: .utf8))
         default:
             completionHandler?(nil)
         }
