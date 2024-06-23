@@ -74,7 +74,7 @@
 		39BF9FC12A2E9E51000E7269 /* YggdrasilNetworkExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YggdrasilNetworkExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		39CC924B221DEDCE004960DC /* IPCResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCResponses.swift; sourceTree = "<group>"; };
 		39DB9BEC2BCF28FA009BF2A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		39F0205B2996CD760093F603 /* Yggdrasil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yggdrasil.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YggdrasilSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F0205D2996CD760093F603 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		39F0205F2996CD760093F603 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		39F020612996CD770093F603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				E593CE971DF905AF00D7265D /* YggdrasilNetworkExtension.appex */,
-				39F0205B2996CD760093F603 /* Yggdrasil.app */,
+				39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,9 +187,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		39F0205A2996CD760093F603 /* Yggdrasil */ = {
+		39F0205A2996CD760093F603 /* YggdrasilSwiftUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 39F020672996CD770093F603 /* Build configuration list for PBXNativeTarget "Yggdrasil" */;
+			buildConfigurationList = 39F020672996CD770093F603 /* Build configuration list for PBXNativeTarget "YggdrasilSwiftUI" */;
 			buildPhases = (
 				39F020572996CD760093F603 /* Sources */,
 				39F020582996CD760093F603 /* Frameworks */,
@@ -201,9 +201,9 @@
 			dependencies = (
 				39F99B362A48F70F0045BD10 /* PBXTargetDependency */,
 			);
-			name = Yggdrasil;
+			name = YggdrasilSwiftUI;
 			productName = YggdrasilSwiftUI;
-			productReference = 39F0205B2996CD760093F603 /* Yggdrasil.app */;
+			productReference = 39F0205B2996CD760093F603 /* YggdrasilSwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */ = {
@@ -232,7 +232,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					39F0205A2996CD760093F603 = {
@@ -269,7 +269,7 @@
 			projectRoot = "";
 			targets = (
 				E593CE961DF905AF00D7265D /* YggdrasilNetworkExtension */,
-				39F0205A2996CD760093F603 /* Yggdrasil */,
+				39F0205A2996CD760093F603 /* YggdrasilSwiftUI */,
 			);
 		};
 /* End PBXProject section */
@@ -474,6 +474,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -538,6 +539,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -643,7 +645,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		39F020672996CD770093F603 /* Build configuration list for PBXNativeTarget "Yggdrasil" */ = {
+		39F020672996CD770093F603 /* Build configuration list for PBXNativeTarget "YggdrasilSwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				39F020682996CD770093F603 /* Debug */,

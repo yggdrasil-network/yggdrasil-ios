@@ -189,8 +189,6 @@ class CrossPlatformAppDelegate: PlatformAppDelegate, ObservableObject {
                     self.yggdrasilPublicKey = summary.publicKey
                     self.yggdrasilPeers = summary.peers
                     self.yggdrasilConnected = summary.peers.filter { $0.up }.count > 0
-                    
-                    print("Response: \(String(data: js, encoding: .utf8))")
                 }
             }
         }
